@@ -1,0 +1,55 @@
+Options +FollowSymLinks -MultiViews -Indexes
+RewriteEngine On
+RewriteBase /priculjica/
+
+# Redirect from nova-prica.php, if empty, to ostale-price.php
+RewriteRule ^nova-prica$ ostale-price [R=302,L]
+
+# Redirect to remove .php extension if the request is for a .php file
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=302,NE,L]
+
+# If the request is for a file or directory, don't rewrite
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rewrite URLs for nova-prica.php
+RewriteCond %{QUERY_STRING} !^naslov=
+RewriteRule ^nova-prica/(.*)$ /priculjica/nova-prica.php?naslov=$1 [L,QSA]
+
+# Rewrite URL to lowercase
+RewriteCond %{REQUEST_URI} [A-Z]
+RewriteRule (.*) ${lc:$1} [R=302,L]
+
+# Remove index
+RewriteRule (.*)index$ $1 [R=302]
+
+# Add .php extension silently
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# DISABLE CACHING
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</IfModule>
+
+<FilesMatch "\.(css|flv|gif|htm|html|ico|jpe|jpeg|jpg|js|mp3|mp4|png|pdf|swf|txt)$">
+    <IfModule mod_expires.c>
+        ExpiresActive Off
+    </IfModule>
+    <IfModule mod_headers.c>
+        FileETag None
+        Header unset ETag
+        Header unset Pragma
+        Header unset Cache-Control
+        Header unset Last-Modified
+        Header set Pragma "no-cache"
+        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+        Header set Expires "Thu, 1 Jan 1970 00:00:00 GMT"
+    </IfModule>
+</FilesMatch>
+

@@ -1,0 +1,269 @@
+header {
+	width: 100%;
+	height: 80px;
+	position: fixed;
+	top: 0;
+	display: flex;
+	justify-content: center;
+	z-index: 999;
+	background-color: #F3EAD7;
+	transition: filter 500ms ease-in-out;
+}
+
+.header_logo_wrapper {
+	width: 25%;
+	height: 100%;
+	margin-right: auto;
+	display: flex;
+	align-items: center;
+}
+
+header button {
+	width: 70px;
+	height: 70px;
+	margin-left: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 999;
+}
+
+header img {
+	width: 100%;
+}
+
+.header_links_wrapper {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 7.5%;
+	overflow: hidden;
+}
+
+header a {
+	margin-right: 19px;
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	font-family: 'caroni_regular';
+	font-size: 30px;
+	white-space: nowrap;
+	color: rgba(40,40,40,1.00);
+}
+
+.header_links_dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background-color: #5C9598;
+	transform: translateY(-70px);
+}
+
+.header_links_dot.hovered {
+	animation: dot_hover 500ms ease-in-out forwards;
+}
+
+@keyframes dot_hover {
+	25% {
+		transform: translateY(50%);
+	}
+	
+	50% {
+		height: 5px;
+	}
+	
+	75% {
+		height: 15px;
+		transform: translateY(-50%);
+	}
+	
+	100% {
+		height: 12px;
+		transform: translateY(0%);
+	}
+}
+
+.header_links_dot.unhovered {
+	animation: dot_unhover 250ms ease-in-out forwards;
+}
+
+@keyframes dot_unhover {
+	0% {
+		transform: translateY(0%);
+	}
+	
+	100% {
+		height: 12px;
+		transform: translateY(-70px);
+	}
+}
+
+.header_aside_button {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	right: 30px;
+	border-radius: 50%;
+	overflow: hidden;
+	background-color: #5C9598;
+	font-size: 25px;
+	color: white;
+	transition: background-color 400ms ease-in-out, color 400ms ease-in-out, filter 400ms ease-in-out;
+}
+
+.header_aside_button:focus-visible {
+	outline: 2px solid black;
+}
+
+.header_aside_button.active {
+	background-color: white;
+	color: #5C9598;
+}
+
+.header_aside_button:hover {
+	filter: brightness(0.999);
+}
+
+.header_aside_button i, .header_aside_button:after {
+	position: absolute;
+	transition: transform 400ms ease-in-out;
+}
+
+.header_aside_button i:first-child.active {
+	transform: translateY(40px);
+}
+
+.header_aside_button i:last-child {
+	transform: translateY(-40px);
+}
+
+.header_aside_button i:last-child.active {
+	transform: translateY(0px);
+}
+
+header aside {
+	width: 0;
+	height: 100%;
+	position: fixed;
+	right: 0;
+	background-color: #5C9598;
+	transition: width 400ms ease-in-out;
+}
+
+header aside.expand {
+	width: 350px;
+}
+
+.header_aside_language_select {
+	width: 200px;
+	height: 50px;
+	position: relative;
+	top: 150px;
+	left: 75px;
+	border-radius: 25px;
+	border: none;
+	background-color: white;
+	text-align: center;
+	font-family: 'Georgia', serif;
+	font-size: 17.5px;
+	font-weight: bold;
+	color: rgba(90,90,90,1.00);
+	-moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.header_aside_language_select:hover {
+	cursor: pointer;
+}
+
+@media (max-width: 992px) {
+	
+	header a {
+		font-size: 22.5px;
+	}
+	
+}
+
+@media (max-width: 900px) {
+	
+	header {
+		overflow: hidden;
+		transition: padding 500ms ease-in-out;
+	}
+	
+	header.expand {
+		padding-bottom: 300px;
+	}
+	
+	.header_logo_wrapper {
+		width: 100%;
+		justify-content: center;
+	}
+	
+	.header_logo_wrapper button {
+		margin-left: 0;
+		align-items: flex-end;
+	}
+
+	header img {
+		margin-bottom: 3.5px;
+	}
+	
+	.header_links_wrapper {
+		height: 300px;
+		margin-top: 80px;
+		flex-direction: column;
+		justify-content: center;
+	}
+	
+	header a, header a:last-child {
+		margin-right: 0px;
+		position: relative;
+		font-size: 25px;
+		transition: gap 200ms ease;
+	}
+	
+	.header_links_dot {
+		width: 0;
+		position: absolute;
+		left: -20px;
+		transform: translateY(0);
+	}
+	
+	.header_links_dot.hovered {
+		animation: dot_hover 300ms ease-in-out forwards;
+	}
+	
+	.header_links_dot.unhovered {
+		animation: dot_unhover 300ms ease-in-out forwards;
+	}
+	
+	header a:hover .header_links_dot {
+		width: 12px;
+	}
+
+	.header_aside_button {
+		position: relative;
+		right: 15px;
+		z-index: 1000;
+	}
+
+	header aside {
+		width: 100%;
+		height: 0;
+		position: absolute;
+		bottom: 0;
+		z-index: 999;
+		transition: height 400ms ease-in-out;
+	}
+
+	header aside.expand {
+		width: 100%;
+		height: 380px;
+	}
+
+}

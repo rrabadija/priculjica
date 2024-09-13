@@ -1,0 +1,6 @@
+# robots.txt for https://www.priculjica.com
+
+User-agent: *
+Disallow: /admin/
+Disallow: /php/
+Disallow: /nova-prica

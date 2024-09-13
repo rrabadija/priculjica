@@ -1,0 +1,29 @@
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+RewriteBase /priculjica/admin/
+
+# Redirect to remove .php extension if the request is for a .php file
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=302,NE,L]
+
+# If the request is for a file or directory, don't rewrite
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rewrite URLs for nova-prica.php
+RewriteCond %{QUERY_STRING} !^naslov=
+RewriteRule ^admin-nova-prica/(.*)$ admin-nova-prica.php?naslov=$1 [L,QSA]
+
+# Rewrite URL to lowercase
+RewriteCond %{REQUEST_URI} [A-Z]
+RewriteRule (.*) ${lc:$1} [R=302,L]
+
+# Remove index
+RewriteRule (.*)index$ $1 [R=302]
+
+# Add .php extension silently
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
