@@ -1,0 +1,243 @@
+@import 'nova-prica.css';
+
+.toolbar_height {
+    height: 50%;
+    position: absolute;
+}
+
+.toolbar_toggle_button {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    z-index: 998;
+    background-color: #5C9598;
+    font-size: 30px;
+    color: white;
+    transition: font-size 150ms ease-in-out;
+}
+
+.toolbar_toggle_button:hover {
+    font-size: 40px;
+}
+
+.toolbar_toggle_button i {
+    position: relative;
+    top: 2px;
+    transition: color 150ms ease-in-out;
+}
+
+.toolbar_toggle_button.expand i {
+    color: #F5D1C3;
+}
+
+.toolbar {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50px;
+    z-index: 997;
+    overflow: hidden;
+    background-color: #5C9598;
+    transition: height 300ms ease-in-out, box-shadow 300ms ease-in-out;
+}
+
+.toolbar.expand {
+    height: 50%;
+    overflow: scroll;
+}
+
+.toolbar.expanded {
+    box-shadow: -8px -1px 16px -10px rgba(0,0,0,0.6);
+}
+
+.toolbar_buttons_container {
+    position: absolute;
+    bottom: 60px;
+    overflow-y: scroll;
+}
+
+.toolbar_buttons_container button {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    top: 2.5px;
+    border-radius: 50%;
+    background-color: #5C9598;
+    font-size: 20px;
+    color: white;
+    transition: font-size 100ms ease-in-out;
+}
+
+.toolbar_buttons_container button:hover {
+    font-size: 25px;
+}
+
+.toolbar_buttons_container button.active {
+    font-size: 25px;
+    color: #F5D1C3;
+}
+
+.toolbar_controls_container {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 32.5px;
+    z-index: 996;
+    overflow: hidden;
+    background-color: #5C9598;
+    transition: width 300ms ease-in-out;
+}
+
+.toolbar_controls_container.expand {
+    width: 350px;
+    height: 50%;
+    overflow: scroll;
+}
+
+.toolbar_controls {
+    width: 290px;
+    padding: 30px 0;
+    position: absolute;
+    right: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.toolbar_controls input[type="file"] {
+    display: none;
+}
+
+.toolbar_label {
+    width: 175px;
+    height: 175px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 15px solid #C4D8D4;
+    background-color: #C4D8D4;
+    background-size: contain;
+}
+
+.toolbar_label:hover {
+    cursor: pointer;
+}
+
+.toolbar_label i {
+    font-size: 30px;
+    color: white;
+}
+
+.toolbar_controls input[type="text"] {
+    width: 200px;
+    height: 35px;
+	padding: 0 10px;
+	border-radius: 50px;
+    border: none;
+    background-color: #F5D1C3;
+    font-family: 'caroni_regular';
+    font-size: 17.5px;
+}
+
+.toolbar_controls p {
+    height: 0;
+    text-align: center;
+    font-family: 'caroni_regular';
+    font-size: 25px;
+    color: white;
+}
+
+.toolbar_controls button {
+    width: 150px;
+	height: 40px;
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+	background-color: #C4D8D4 !important;
+    font-family: 'Georgia', serif;
+	font-size: 15px;
+	font-weight: bold;
+	color: rgba(90,90,90,1.00) !important;
+}
+
+.toolbar_controls button:hover:before {
+	width: 150px;
+	height: 150px;
+}
+
+.toolbar_controls button:before {
+    content: '';
+	width: 0px;
+	height: 0px;
+    margin: auto;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	border-radius: 50%;
+	background-color: #F5D1C3;
+	z-index: 0;
+	transition: width 400ms ease-in-out, height 400ms ease-in-out;
+}
+
+.toolbar_controls button:after {
+    content: 'Umetni';
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+	z-index: 1;
+    transform: translateY(-50%);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    appearance: textfield;
+    -webkit-appearance: texfield;
+    -moz-appearance: textfield;
+    width: 50px;
+    height: 30px;
+    position: relative;
+    left: 3px;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    color: white;
+}
+
+input[type="number"], .section_header h1:focus, .section_paragraph:focus {
+    border: none;
+    outline: none;
+}
+
+.section_header h1:empty:before {
+    content: attr(data-placeholder-title);
+    color: #BABABA;
+    cursor: text;
+}
+
+.section_paragraph:empty:before {
+    content: attr(data-placeholder-paragraph);
+    color: #BABABA;
+    cursor: text;
+}

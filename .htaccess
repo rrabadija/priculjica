@@ -37,7 +37,7 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
     Header set Expires 0
 </IfModule>
 
-<FilesMatch "\.(css|flv|gif|htm|html|ico|jpe|jpeg|jpg|js|mp3|mp4|png|pdf|swf|txt)$">
+<FilesMatch "\.(css|htm|html|js|txt)$">
     <IfModule mod_expires.c>
         ExpiresActive Off
     </IfModule>

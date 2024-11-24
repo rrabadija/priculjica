@@ -1,12 +1,10 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
-    $host = 'localhost'; //Database login credentials
-    $dbname = 'priculjica';
-    $username = 'root';
-    $password = 'kekkadakeda2556';
+    require_once 'config.php';
 
-    try { //Set PDO connection
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        die("Connection failed: " . $e->getMessage());
-    }
+    $DBHost = DB_HOST; //Database login credentials
+    $DBName = DB_NAME;
+    $DBUser = DB_USER;
+    $DBPass = DB_PASS;
+
+    $PDO = new PDO("mysql:host=$DBHost;dbname=$DBName;charset=utf8mb4", $DBUser, $DBPass); //Set PDO connection
+    $PDO -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

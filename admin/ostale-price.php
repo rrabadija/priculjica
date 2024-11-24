@@ -1,15 +1,15 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
-    require_once 'php/header.php';
-	require_once 'php/search.php';
-    require_once 'php/footer.php';
-	require_once 'php/language.php';
+    require_once '../php/header.php';
+	require_once '../php/search.php';
+    require_once '../php/footer.php';
+	require_once '../php/language.php';
 ?>
 <!doctype html>
 <html lang="<?=$_SESSION['language']?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pričuljica</title>
+<title>Pričuljica - Admin</title>
 
 <base href="/priculjica/">
 

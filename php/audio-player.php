@@ -1,6 +1,6 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
-    function audioPlayer($rows) { //Generate the audio player
-        if ((isset($rows['audio']) && $rows['audio'] === 1)) {
+    function audioPlayer($audioBool, $audioSrc) { //Generate the audio player
+        if ($audioBool === 1) {
             echo '<div class="section_audio">
 
                     <div class="section_audio_button">
@@ -41,7 +41,7 @@
 
                     </div>
 
-                    <audio src="' . htmlspecialchars($rows['put_do_audio']) . '" type="audio/mpeg">
+                    <audio src="' . $audioSrc . '" type="audio/mpeg">
 
             </div>';
         }

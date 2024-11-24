@@ -1,15 +1,15 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
-    require_once 'php/header.php';
-	require_once 'php/circle.php';
-	require_once 'php/footer.php';
-	require_once 'php/language.php';
+    require_once '../php/header.php';
+	require_once '../php/circle.php';
+	require_once '../php/footer.php';
+	require_once '../php/language.php';
 ?>
 <!doctype html>
 <html lang="<?=$_SESSION['language']?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pričuljica</title>
+<title>Pričuljica - Admin</title>
 
 <base href="/priculjica/">
 
@@ -41,7 +41,7 @@
 					
 					<div class="section_1_content_header">
 
-						<h1><?=setLanguage("index.h1")?></h1>
+						<h1><?=setLanguage("index.h1")?><h1>
 						
 					</div>
 					
@@ -53,7 +53,7 @@
 					
 					<div class="section_1_content_button">
 
-						<a href="<?=$rows[0]["title"] ?? '' ? 'nova-prica/' . setChar(sanitize($rows[0]["title"])) : 'nova-prica'?>" tabindex="-1">
+						<a href="/priculjica/admin/nova-prica" tabindex="-1">
 
 							<button></button>
 
@@ -69,7 +69,7 @@
 						
 						<div class="section_1_content_circle_image">
 							
-							<img src="/priculjica/assets/images/priculjica.png" alt="<?=setLanguage("index.img-alt-1")?>">
+							<img src="/priculjica/assets/images/priculjica.png" alt="<?=setLanguage("index.img-alt-1", true)?>">
 							
 						</div>
 						
@@ -89,6 +89,12 @@
 
 					<div class="section_2_content_circle_image">
 
+						<?=$circle -> generateCircle(-1)?>
+
+					</div>
+
+					<div class="section_2_content_circle_image">
+
 						<?=$circle -> generateCircle(0)?>
 
 					</div>
@@ -96,12 +102,6 @@
 					<div class="section_2_content_circle_image">
 
 						<?=$circle -> generateCircle(1)?>
-
-					</div>
-
-					<div class="section_2_content_circle_image">
-
-						<?=$circle -> generateCircle(2)?>
 
 					</div>
 						
@@ -123,13 +123,13 @@
 
 							<div class="keen-slider__slide">
 						
-								<p><?=setLanguage("index.p-2")?></p>
+								<p><?=setLanguage("index.p-2", true)?></p>
 
 							</div>
 
 							<div class="keen-slider__slide">
 
-								<p><?=setLanguage("index.p-3")?></p>
+								<p><?=setLanguage("index.p-3", true)?></p>
 
 							</div>
 

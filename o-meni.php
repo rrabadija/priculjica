@@ -1,26 +1,25 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
-	require 'php/connect.php';
-    require 'php/string.php';
-    require 'php/header.php';
-	require 'php/footer.php';
+    require_once 'php/header.php';
+	require_once 'php/footer.php';
+	require_once 'php/language.php';
 ?>
 <!doctype html>
-<html lang="hr">
+<html lang="<?=$_SESSION['language']?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pričuljica</title>
 
 <base href="/priculjica/">
-<link rel="apple-touch-icon" sizes="180x180" href="/priculjica/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/priculjica/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/priculjica/favicon/favicon-16x16.png">
-<link rel="manifest" href="/priculjica/favicon/site.webmanifest">
-<link href="/priculjica/style/style.css" rel="stylesheet" type="text/css">
-<link href="/priculjica/style/header.css" rel="stylesheet" type="text/css">
-<link href="/priculjica/style/o-meni.css" rel="stylesheet" type="text/css">
-<link href="/priculjica/style/footer.css" rel="stylesheet" type="text/css">
-<link href="/priculjica/font/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<script src="/priculjica/assets/js/theme.js"></script>
+
+<base href="/priculjica/">
+<link rel="apple-touch-icon" sizes="180x180" href="/priculjica/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/priculjica/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/priculjica/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/priculjica/assets/favicon/site.webmanifest">
+<link href="/priculjica/assets/css/o-meni.css" rel="stylesheet" type="text/css">
 	
 </head>
 
@@ -28,7 +27,7 @@
 	
 	<header>
 
-		<?=generateHeader($title = ['POČETNA', 'NOVA PRIČA', 'OSTALE PRIČE', 'PIŠI MI'], $headerURL)?>
+		<?=$header -> generateHeader([setLanguage("header.a-1"), setLanguage("header.a-2"), setLanguage("header.a-3"), setLanguage("header.a-5")])?>
 		
 	</header>
 	
@@ -40,7 +39,7 @@
 				
 				<div class="section_row_bubble" tabindex="0" aria-label="Slika">
 					
-					<img src="/priculjica/img/o-meni.png" alt="Na otvorenoj knjizi sjede s lijeve strane ilustrirana vjeverica s naočalama koja čita knjigu te s desne strane Antonia Šikljan - autorica Pričuljice i njenih priča.">
+					<img src="/priculjica/assets/images/o-meni.png" alt="Na otvorenoj knjizi sjede s lijeve strane ilustrirana vjeverica s naočalama koja čita knjigu te s desne strane Antonia Šikljan - autorica Pričuljice i njenih priča.">
 					
 				</div>
 				
@@ -53,7 +52,7 @@
 						
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_1" src="/priculjica/img/slonic-nonic.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_1" src="/priculjica/assets/images/slonic-nonic.png" alt="">
 					
 				</div>
 				
@@ -69,7 +68,7 @@
 						
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_2" src="/priculjica/img/priculjica-copywriter-o-meni.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_2" src="/priculjica/assets/images/priculjica-copywriter-o-meni.png" alt="">
 						
 				</div>
 				
@@ -82,7 +81,7 @@
 						
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_3" src="/priculjica/img/mau-o-meni.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_3" src="/priculjica/assets/images/mau-o-meni.png" alt="">
 					
 				</div>
 				
@@ -99,7 +98,7 @@
 
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_4" src="/priculjica/img/patuljak-o-meni.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_4" src="/priculjica/assets/images/patuljak-o-meni.png" alt="">
 					
 				</div>
 				
@@ -111,7 +110,7 @@
 						
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_5" src="/priculjica/img/priculjica-zrcalo-o-meni.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_5" src="/priculjica/assets/images/priculjica-zrcalo-o-meni.png" alt="">
 					
 				</div>
 				
@@ -119,7 +118,7 @@
 			
 			<footer>
 				
-				<?=generateFooter(true)?>
+				<?=generateFooter()?>
 				
 			</footer>
 			
@@ -127,7 +126,7 @@
 		
 	</main>
 	
-	<script src="/priculjica/script/header.js"></script>
+	<script type="module" src="/priculjica/assets/js/header.js"></script>
 	
 </body>
 </html>

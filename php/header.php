@@ -1,63 +1,110 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
-    $stmt = $pdo->prepare("SELECT naslov FROM price ORDER BY id DESC LIMIT 1"); //Get the last title from the database for the 'NOVA PRIČA' header link
+    require_once 'connect.php';
+    require_once 'queries.php';
+    require_once 'helpers.php';
 
-    $stmt->execute();
-    $headerURL = $stmt->fetch(PDO::FETCH_ASSOC);
+    class Header {
+        private $headerURL;
+        private $URLs = ['nova-prica', 'ostale-price', 'o-meni', 'pisi-mi'];
+        private $admin = null;
+        private $adminConditions = ['/priculjica/admin/', '/priculjica/admin/nova-prica', '/priculjica/admin/ostale-price'];
 
-    function generateHeader($t, $headerURL) { //Generates the header HTML
-        $header = '<div class="header_logo_wrapper">
+        public function __construct() {
+            $this -> headerURL = setChar(sanitize($GLOBALS['queries'] -> header()));
+
+            if (in_array($_SERVER['REQUEST_URI'], $this -> adminConditions)) {
+                $this -> admin = true;
+            }
+            else {
+                $this -> admin = false;
+            }
+        }
+
+        public function generateHeader($hrefs) {
+            $header = '<div class="header_logo_wrapper">
 			
                             <button>
                             
-                                <img src="/priculjica/img/priculjica-logo.png" alt="">  
+                                <img src="/priculjica/assets/images/priculjica-logo.png" alt="">
                                 
                             </button>
                             
                         </div>
                         
                         <div class="header_links_wrapper">';
+
+            foreach($hrefs as $key => $href) {
+                switch ($href) {
+                    case 'POČETNA':
+                    case 'HOME':
+                        $header .= !$this -> admin ? '<a href="/priculjica/">' : '<a href="/priculjica/admin/">';
+
+                        break;
+                    
+                    case 'NOVA PRIČA':
+                    case 'NEW STORY':
+                        if (!$this -> admin) {
+                            $header .= $this -> headerURL
+                                ? '<a href="/priculjica/' . $this -> URLs[0] . '/' . $this -> headerURL . '">'
+                                : '<a href="/priculjica/' . $this -> URLs[0] . '">';
+                        }
+                        else {
+                            $header .= '<a href="/priculjica/admin/' . $this -> URLs[0] . '">';
+                        }
+
+                        break;
+
+                    case 'OSTALE PRIČE':
+                    case 'OTHER STORIES':
+                        $header .= !$this -> admin
+                            ? '<a href="/priculjica/' . $this -> URLs[1] . '">'
+                            : '<a href="/priculjica/admin/' . $this -> URLs[1] . '">';
+
+                        break;
+
+                    default:
+                        $header .= '<a href="/priculjica/' . $this -> URLs[$key] . '">';
+
+                        break;
+                }
+
+                $header .= '<div class="header_links_dot"></div>
+
+                            ' . $href . '
+
+                        </a>';
+            }
                             
-                            foreach ($t as $l) { //Loop for generating the links inside the header
-                                if ($l === 'POČETNA') {
-                                    $hyperLink = '<a href="/priculjica">';
-                                }
-                                else if ($l === 'NOVA PRIČA') {
-                                    $hyperLink = (isset($headerURL['naslov'])) ? '<a href="' . strtolower(setChar($l)) . '/' . setChar(htmlspecialchars($headerURL['naslov'])) . '">' :
-                                    '<a href="nova-prica/">';
-                                }
-                                else {
-                                    $hyperLink = '<a href="' . strtolower(setChar($l)) . '">';
-                                }
+                $header .= '<button class="header_aside_button">
 
-                                $header .= $hyperLink .
+			                    <i class="fa fa-cog"></i>
 
-                                                '<div class="header_links_dot"></div>
+			                    <i class="fa fa-close"></i>
 
-                                                ' . $l . '
+		                    </button>
 
-                                            </a>';
-                            }
-                            
-                        $header .= '    <button class="header_aside_button">
-
-			                                <i class="fa fa-cog"></i>
-
-			                                <i class="fa fa-close"></i>
-
-		                                </button>
-
-                                    </div>
+                        </div>
                                     
-                                    <aside>
+                        <aside>
 
-                                        <select class="header_aside_language_select">
+                            <select class="header_aside_language_select">
 
-                                            <option value="hr">Hrvatski</option>
-                                            <option value="en">Engleski</option>
+                                <option value="hr">Hrvatski</option>
+                                <option value="en">Engleski</option>
 
-                                        </select>
+                            </select>
 
-                                    </aside>';
+                            <div class="header_aside_darkmode_select_wrapper">
+
+                                <input type="checkbox">
+                                <label>Darkmode</label>
+                                                
+                            </div>
+
+                        </aside>';
             
-        return $header;
+            return $header;
+        }
     }
+
+    $header = new Header;

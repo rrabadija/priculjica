@@ -1,37 +1,28 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
-    function generateFooter($default) {
+    require_once 'language.php';
+
+    function generateFooter() { //Footer template
         $footer = '<div class="footer_links">
 
-                <a href="">
+                        <a href="">
 
-                    <i class="fa fa-instagram"></i>
+                            <i class="fa fa-instagram"></i>
                     
-                </a>
+                        </a>
 
-                <a href="">
+                        <a href="">
                     
-                    <i class="fa fa-facebook"></i>
+                            <i class="fa fa-facebook"></i>
                     
-                </a>
+                        </a>
 
-            </div>
+                    </div>
 
-            <p>
+                    <p>
 
-                ' . ($default ? 'Copyright &#169; ' . date("Y") . ' Pričuljica. Sva prava pridržana' : 'Copyright &#169; ' . date("Y") . ' Pričuljica. All rights reserved') . '
+                        Copyright &#169; ' . date("Y") . ' Pričuljica. <span>' . setLanguage("footer.p") . '</span>
 
-            </p>';
+                    </p>';
 
         return $footer;
-    }
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['language'])) { //If the language is changed
-        $language = htmlspecialchars($_POST['language'] ?? '');
-
-        if ($language === 'en') {
-            echo generateFooter(false);
-        }
-        else {
-            echo generateFooter(true);
-        }
     }
