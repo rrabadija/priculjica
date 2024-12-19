@@ -20,7 +20,7 @@
 
                         <button class="toolbar_toggle_button"><i class="fa fa-plus"></i></button>
         
-                        <aside class="toolbar toolbar_story">
+                        <aside class="toolbar">
 
                             <div class="toolbar_buttons_container">
 
@@ -64,7 +64,7 @@
 
                         <button class="toolbar_toggle_button"></button>
         
-                        <aside class="toolbar toolbar_search">
+                        <aside class="toolbar">
 
                             <div class="toolbar_buttons_container">
                         
@@ -81,8 +81,8 @@
             return $this -> toolbar;
         }
 
-        public function generateToolbarControls($control) {
-            $toolbarControls = '<div class="toolbar_controls ' . $control . '">
+        private function generateToolbarControls($control) {
+            $toolbarControls = '<div class="toolbar_controls ' . str_replace('_', '_controls_', $control) . '">
 
                                     ' . $this -> toolbarControl($control) . '
 
@@ -91,7 +91,7 @@
             return $toolbarControls;
         }
 
-        public function toolbarControl($control) {
+        private function toolbarControl($control) {
             switch ($control) {
                 case 'toolbar_image':
                     $this -> toolbarControl = '<input type="file" id="file_image" name="file_image">

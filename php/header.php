@@ -1,23 +1,14 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
     require_once 'connect.php';
-    require_once 'queries.php';
     require_once 'helpers.php';
+    require_once 'queries.php';
 
     class Header {
         private $headerURL;
         private $URLs = ['nova-prica', 'ostale-price', 'o-meni', 'pisi-mi'];
-        private $admin = null;
-        private $adminConditions = ['/priculjica/admin/', '/priculjica/admin/nova-prica', '/priculjica/admin/ostale-price'];
 
         public function __construct() {
             $this -> headerURL = setChar(sanitize($GLOBALS['queries'] -> header()));
-
-            if (in_array($_SERVER['REQUEST_URI'], $this -> adminConditions)) {
-                $this -> admin = true;
-            }
-            else {
-                $this -> admin = false;
-            }
         }
 
         public function generateHeader($hrefs) {
@@ -33,38 +24,42 @@
                         
                         <div class="header_links_wrapper">';
 
-            foreach($hrefs as $key => $href) {
+            foreach($hrefs as $href) {
                 switch ($href) {
                     case 'POČETNA':
                     case 'HOME':
-                        $header .= !$this -> admin ? '<a href="/priculjica/">' : '<a href="/priculjica/admin/">';
+                        $header .= '<a href="/priculjica/">';
 
                         break;
                     
                     case 'NOVA PRIČA':
                     case 'NEW STORY':
-                        if (!$this -> admin) {
+                        if ($_SESSION['user_role'] === 'user') {
                             $header .= $this -> headerURL
                                 ? '<a href="/priculjica/' . $this -> URLs[0] . '/' . $this -> headerURL . '">'
                                 : '<a href="/priculjica/' . $this -> URLs[0] . '">';
                         }
                         else {
-                            $header .= '<a href="/priculjica/admin/' . $this -> URLs[0] . '">';
+                            $header .= '<a href="/priculjica/' . $this -> URLs[0] . '">';
                         }
 
                         break;
 
                     case 'OSTALE PRIČE':
                     case 'OTHER STORIES':
-                        $header .= !$this -> admin
-                            ? '<a href="/priculjica/' . $this -> URLs[1] . '">'
-                            : '<a href="/priculjica/admin/' . $this -> URLs[1] . '">';
+                        $header .= '<a href="/priculjica/' . $this -> URLs[1] . '">';
 
                         break;
 
-                    default:
-                        $header .= '<a href="/priculjica/' . $this -> URLs[$key] . '">';
+                    case 'O MENI':
+                    case 'ABOUT ME':
+                        $header .= '<a href="/priculjica/' . $this -> URLs[2] . '">';
+        
+                        break;
 
+                    default:
+                        $header .= '<a href="/priculjica/' . $this -> URLs[3] . '">';
+                
                         break;
                 }
 
@@ -99,9 +94,18 @@
                                 <input type="checkbox">
                                 <label>Darkmode</label>
                                                 
-                            </div>
+                            </div>'
 
-                        </aside>';
+                            . ($_SESSION['user_role'] === 'admin'
+                                ? '<form method="POST" action="/priculjica/php/login.php">
+
+                                        <input type="hidden" name="userRedirect" value="true">
+                                        <button type="submit" style="cursor:pointer;color:white;" class="header_aside_user_redirect">' . $_SESSION['user_role'] . '</button>
+
+                                    </form>'
+                                : '') .
+                            
+                        '</aside>';
             
             return $header;
         }

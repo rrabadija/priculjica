@@ -3,13 +3,14 @@
 	require_once 'php/circle.php';
 	require_once 'php/footer.php';
 	require_once 'php/language.php';
+	require_once 'php/login.php';
 ?>
 <!doctype html>
 <html lang="<?=$_SESSION['language']?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pričuljica</title>
+<title>Pričuljica<?=$_SESSION['user_role'] === 'admin' ? ' - Admin' : ''?></title>
 
 <base href="/priculjica/">
 
@@ -53,7 +54,7 @@
 					
 					<div class="section_1_content_button">
 
-						<a href="<?=$rows[0]["title"] ?? '' ? 'nova-prica/' . setChar(sanitize($rows[0]["title"])) : 'nova-prica'?>" tabindex="-1">
+						<a href="<?=$_SESSION['user_role'] === 'user' ? ($rows[0]["title"] ?? '' ? 'nova-prica/' . setChar(sanitize($rows[0]["title"])) : 'nova-prica') : ('nova-prica')?>" tabindex="-1">
 
 							<button></button>
 
@@ -89,7 +90,7 @@
 
 					<div class="section_2_content_circle_image">
 
-						<?=$circle -> generateCircle(0)?>
+						<?=$_SESSION['user_role'] === 'user' ? $circle -> generateCircle(0) : $circle -> generateCircle(-1)?>
 
 					</div>
 
@@ -168,6 +169,8 @@
 		<?=generateFooter()?>
 
 	</footer>
+
+	<?=$login -> generateLogin()?>
 	
 	<script type="module" src="/priculjica/assets/js/index.js"></script>
 	

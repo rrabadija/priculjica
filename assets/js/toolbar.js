@@ -20,10 +20,10 @@ export default class Toolbar {
             this.toggleToolbar();
         }, 300));
 
-        toolbarButtons.forEach((button, index) => {
-            if (index <= 1) {
-                button.addEventListener('click', throttle(this.toggleToolbarControls.bind(this, button), 300));
-            }
+        const throttleToolbarButtons = throttle((button) => this.toggleToolbarControls(button), 300);
+
+        toolbarButtons.forEach((button) => {
+            button.addEventListener('click', () => throttleToolbarButtons(button));
         });
     }
 
@@ -52,12 +52,11 @@ export default class Toolbar {
         if (!this.toolbarControls.classList.contains('expand')) {
             this.lastToolbarControl = button.classList;
 
+            this.toolbar.classList.add('expanded');
             this.toolbarControls.classList.add('expand');
 
             this.toolbarButtons.forEach(button => button.classList.remove('active'));
             button.classList.add('active');
-
-            this.toolbar.classList.add('expanded');
         }
         else {
             this.currentToolbarControl = button.classList;
@@ -71,11 +70,7 @@ export default class Toolbar {
                 button.classList.add('active');
 
                 setTimeout(() => {
-                    this.toolbarControls.style.width = '350px';
-
-                    setTimeout(() => {
-                        this.toolbarControls.style.width = '';
-                    }, 1);
+                    this.toolbarControls.style.width = '';
                 }, 300);
             }
             else {
@@ -87,11 +82,10 @@ export default class Toolbar {
     }
 
     closeToolbarControls = () => {
+        this.toolbarControls.classList.remove('expand');
         this.toolbarButtons.forEach(button => button.classList.remove('active'));
 
         this.toolbarControls.style.height = '50%';
-
-        this.toolbarControls.classList.remove('expand');
 
         setTimeout(() => {
             this.toolbar.classList.remove('expanded');
@@ -108,35 +102,14 @@ export default class Toolbar {
         })
 
         .then(response => response.json())
-        .then(data => {
-            if (this.currentToolbarControl === this.lastToolbarControl) {
-                setTimeout(() => {
-                    this.toolbarControls.innerHTML = data;
-                }, 200);
-            }
-            else {
-                this.toolbarControls.innerHTML = data;
-            }
-        });
+        .then(data =>
+            this.currentToolbarControl === this.lastToolbarControl
+                ? setTimeout(() => {this.toolbarControls.innerHTML = data}, 250)
+                : this.toolbarControls.innerHTML = data
+        );
     }
 
     resizeControls = () => {
         this.toolbarButtonsContainer.style.height = `${(this.toolbarHeight.offsetHeight - 60)}px`;
     }
 }
-
-let toolbarButtons = [];
-
-const toolbar = new Toolbar (
-    document.querySelector('.toolbar_height'),
-    document.querySelector('.toolbar_toggle_button'),
-    document.querySelector('.toolbar'),
-    document.querySelector('.toolbar_buttons_container'),
-    
-    toolbarButtons = [
-        document.querySelector('.toolbar_image'),
-        document.querySelector('.toolbar_audio')
-    ].filter(button => button !== null),
-
-    document.querySelector('.toolbar_controls_container')
-);

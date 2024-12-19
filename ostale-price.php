@@ -3,13 +3,14 @@
 	require_once 'php/search.php';
     require_once 'php/footer.php';
 	require_once 'php/language.php';
+	require_once 'php/login.php';
 ?>
 <!doctype html>
 <html lang="<?=$_SESSION['language']?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pričuljica</title>
+<title>Pričuljica<?=$_SESSION['user_role'] === 'admin' ? ' - Admin' : ''?></title>
 
 <base href="/priculjica/">
 
@@ -60,6 +61,8 @@
         <?=generateFooter()?>
 				
 	</footer>
+
+	<?=$login -> generateLogin()?>
 	
 	<script type="module" src="/priculjica/assets/js/header.js"></script>
 

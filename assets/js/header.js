@@ -111,6 +111,18 @@ export default class Header {
 
 	headerTabIndex = (value1, value2, value3) => {
 		const sideBarElements = Array.from(this.sideBar.children);
+		
+		sideBarElements.forEach(element => {
+			if (element.children.length > 0) {
+				sideBarElements.push(...Array.from(element.children));
+				
+				const index = sideBarElements.indexOf(element);
+
+				if (index === 1) {
+					sideBarElements.splice(index, 1);
+				}
+			}
+		});
 
 		this.headerLinks.forEach(link => {
 			link.tabIndex = `${value1}`
@@ -200,7 +212,7 @@ const sideBar = new SideBar (
 	document.querySelector('header aside'),
 	document.querySelector('.header_aside_button'),
 	document.querySelector('.header_aside_button i:first-child'),
-	document.querySelector('.header_aside_button i:last-child')
+	document.querySelector('.header_aside_button i:last-child'),
 );
 
 const header = new Header (

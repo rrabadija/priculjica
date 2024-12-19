@@ -59,9 +59,11 @@ section a {
 
 .session_anchor {
 	background-color: #5C9598 !important;
+	color: white !important;
 }
 
-.session_anchor h2, .session_anchor p {
+.session_anchor .section_content_text_wrapper h2,
+.session_anchor .section_content_text_wrapper p {
 	color: white !important;
 }
 

@@ -10,7 +10,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Content-Type: application/json; charset=UTF-8');
 
-        if (isset($FETCH['language'])) {
+        if (isset($GLOBALS['FETCH']['language'])) {
             $language = sanitize($GLOBALS['FETCH']['language']);
 
             $_SESSION['language'] = $language;

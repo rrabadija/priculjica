@@ -493,7 +493,7 @@ section:nth-child(2) {
 }
 
 .section_2_content_circle_image:nth-child(1) p {
-	color: white;
+	color: white !important;
 }
 
 .section_2_content_circle_image_text_wrapper .section_1_content_button {

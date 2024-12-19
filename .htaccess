@@ -2,8 +2,9 @@ Options +FollowSymLinks -MultiViews -Indexes
 RewriteEngine On
 RewriteBase /priculjica/
 
-# Redirect from nova-prica.php, if empty, to ostale-price.php
-RewriteRule ^nova-prica$ ostale-price [R=302,L]
+# Redirect URLs ending with /admin to their parent path
+RewriteCond %{REQUEST_URI} ^(/priculjica(?:/[^/]+)*)/admin/?$ [NC]
+RewriteRule ^ %1?admin=true [R=302,L]
 
 # Redirect to remove .php extension if the request is for a .php file
 RewriteCond %{REQUEST_METHOD} !POST
@@ -15,9 +16,9 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Rewrite URLs for nova-prica.php
-RewriteCond %{QUERY_STRING} !^naslov=
-RewriteRule ^nova-prica/(.*)$ /priculjica/nova-prica.php?naslov=$1 [L,QSA]
+# Rewrite URLs with "title" query parameter to /title for nova-prica.php
+RewriteCond %{QUERY_STRING} !^title=
+RewriteRule ^nova-prica/(.*)$ /priculjica/nova-prica.php?title=$1 [L,QSA]
 
 # Rewrite URL to lowercase
 RewriteCond %{REQUEST_URI} [A-Z]

@@ -14,17 +14,32 @@
 
 		public function generateCircle($i) {
 			if (isset($this -> rows[$i])) {
-				return $this -> circle($this -> rows[$i]['title'], $this -> rows[$i]['text'], '<a href="nova-prica/' . setChar($this -> rows[$i]['title']), $this -> rows[$i]['image_src'], $this -> rows[$i]['alt_text']);
+				return $this -> circle(
+					$this -> rows[$i]['title'],
+					$this -> rows[$i]['text'],
+
+					'<a href="nova-prica/' . setChar(sanitize($this -> rows[$i]['title'])),
+
+					$this -> rows[$i]['image_src'],
+					$this -> rows[$i]['alt_text']
+				);
 			}
-			else if (isset($_SESSION['title']) && $i === -1) {
-				return $this -> circle($_SESSION['title'], $_SESSION['text'], '<a href="/priculjica/admin/nova-prica', $_SESSION['image_src'], $_SESSION['alt_text']);
+			else if (isset($_SESSION['title'], $_SESSION['text']) && !empty($_SESSION['title'] || $_SESSION['text']) && $i === -1) {
+				return $this -> circle(
+					$_SESSION['title'] ?? '',
+					$_SESSION['text'] ?? '',
+
+					'<a href="/priculjica/nova-prica"',
+					
+					$_SESSION['image_src'] ?? '',
+					$_SESSION['alt_text'] ?? ''
+				);
 			}
 		}
 
 		private function circle($title, $text, $link, $imageSrc, $altText) {
 			$title = sanitize($title ?? '');
 			$text = sanitize($text ?? '');
-			$link = sanitize($link ?? '');
 			$imageSrc = sanitize($imageSrc ?? '');
 			$altText = sanitize($altText ?? '');
 
@@ -34,9 +49,9 @@
 
 							<p>' . limitText($text, 9) . '</p>
 
-							<div class="section_1_content_button">'
+							<div class="section_1_content_button">
 
-								. $link . '" tabindex="-1">
+								' . $link . ' tabindex="-1">
 				
 									<button></button>
 

@@ -1,5 +1,5 @@
 import {headerLinksDots} from './header.js';
-import {debounce, getURL} from './helpers.js';
+import {getURL} from './helpers.js';
 
 export const languageSelector = document.querySelector('.header_aside_language_select');
 
@@ -109,7 +109,6 @@ export function languageSelectorChange() {
 
 	switch (currentPage) {
 		case 'priculjica':
-		case 'admin':
 			headerLinks = {
 				'header.a-2' : document.querySelector('header a:nth-child(1)'),
 				'header.a-3' : document.querySelector('header a:nth-child(2)'),

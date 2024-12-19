@@ -6,41 +6,46 @@
     class Anchor {
         private $rows;
         private $anchor = '';
-        private $admin = null;
 
         public function __construct() {
             $this -> rows = $GLOBALS['queries'] -> initAnchor();
-
-            if ($_SERVER['REQUEST_URI'] === '/priculjica/admin/ostale-price') {
-                $this -> admin = true;
-            }
-            else {
-                $this -> admin = false;
-            }
         }
 
         public function generateAnchor() {
-            $anchor = '';
+            if (isset($_SESSION['title'], $_SESSION['text']) && !empty($_SESSION['title'] || $_SESSION['text']) && $_SESSION['user_role'] === 'admin') {
+                $this -> anchor = $this -> anchor(
+                    $_SESSION['title'] ?? '',
+                    $_SESSION['text'] ?? '',
 
-            if (isset($_SESSION['title']) && $this -> admin) {
-                $anchor = $this -> anchor($_SESSION['title'], $_SESSION['text'], '<a href="/priculjica/admin/nova-prica/ class="session_anchor"', $_SESSION['image_src'], $_SESSION['alt_text']);
+                    '<a href="/priculjica/nova-prica" class="session_anchor"',
+
+                    $_SESSION['image_src'] ?? '',
+                    $_SESSION['alt_text'] ?? ''
+                );
             }
 
             if ($this -> rows) {
-                $anchor .= $this -> anchor($this -> rows['title'], $this -> rows['text'], '<a href="nova-prica/' . setChar($this -> rows['title']), $this -> rows['image_src'], $this -> rows['alt_text']);
+                $this -> anchor .= $this -> anchor(
+                    $this -> rows['title'],
+                    $this -> rows['text'],
+
+                    '<a href="nova-prica/' . setChar(sanitize($this -> rows['title'])),
+
+                    $this -> rows['image_src'],
+                    $this -> rows['alt_text']
+                );
             }
 
-            return $anchor;
+            return $this -> anchor;
         }
 
-        private function anchor($title, $text, $link, $imageSrc, $altText) {
+        public function anchor($title, $text, $link, $imageSrc, $altText) {
             $title = sanitize($title ?? '');
 			$text = sanitize($text ?? '');
-			$link = sanitize($link ?? '');
 			$imageSrc = sanitize($imageSrc ?? '');
 			$altText = sanitize($altText ?? '');
 
-            $this -> anchor = $link . '">
+            $this -> anchor = $link . '>
 
                             <div class="section_content_text_wrapper">
 
