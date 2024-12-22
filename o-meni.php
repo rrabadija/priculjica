@@ -11,16 +11,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pričuljica<?=$_SESSION['user_role'] === 'admin' ? ' - Admin' : ''?></title>
 
-<base href="/priculjica/">
+<script src="/app/js/theme.js"></script>
 
-<script src="/priculjica/assets/js/theme.js"></script>
-
-<base href="/priculjica/">
-<link rel="apple-touch-icon" sizes="180x180" href="/priculjica/assets/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/priculjica/assets/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/priculjica/assets/favicons/favicon-16x16.png">
-<link rel="manifest" href="/priculjica/assets/favicon/site.webmanifest">
-<link href="/priculjica/assets/css/o-meni.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link href="/app/css/o-meni.css" rel="stylesheet" type="text/css">
 	
 </head>
 
@@ -40,7 +37,7 @@
 				
 				<div class="section_row_bubble" tabindex="0" aria-label="Slika">
 					
-					<img src="/priculjica/assets/images/o-meni.png" alt="Na otvorenoj knjizi sjede s lijeve strane ilustrirana vjeverica s naočalama koja čita knjigu te s desne strane Antonia Šikljan - autorica Pričuljice i njenih priča.">
+					<img src="/assets/images/o-meni.png" alt="Na otvorenoj knjizi sjede s lijeve strane ilustrirana vjeverica s naočalama koja čita knjigu te s desne strane Antonia Šikljan - autorica Pričuljice i njenih priča.">
 					
 				</div>
 				
@@ -53,7 +50,7 @@
 						
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_1" src="/priculjica/assets/images/slonic-nonic.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_1" src="/assets/images/slonic-nonic.png" alt="">
 					
 				</div>
 				
@@ -69,7 +66,7 @@
 						
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_2" src="/priculjica/assets/images/priculjica-copywriter-o-meni.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_2" src="/assets/images/priculjica-copywriter-o-meni.png" alt="">
 						
 				</div>
 				
@@ -82,7 +79,7 @@
 						
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_3" src="/priculjica/assets/images/mau-o-meni.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_3" src="/assets/images/mau-o-meni.png" alt="">
 					
 				</div>
 				
@@ -99,7 +96,7 @@
 
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_4" src="/priculjica/assets/images/patuljak-o-meni.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_4" src="/assets/images/patuljak-o-meni.png" alt="">
 					
 				</div>
 				
@@ -111,7 +108,7 @@
 						
 					</p>
 					
-					<img class="section_row_bubble_image section_row_bubble_image_5" src="/priculjica/assets/images/priculjica-zrcalo-o-meni.png" alt="">
+					<img class="section_row_bubble_image section_row_bubble_image_5" src="/assets/images/priculjica-zrcalo-o-meni.png" alt="">
 					
 				</div>
 				
@@ -129,7 +126,7 @@
 
 	<?=$login -> generateLogin()?>
 	
-	<script type="module" src="/priculjica/assets/js/header.js"></script>
+	<script type="module" src="/app/js/header.js"></script>
 	
 </body>
 </html>

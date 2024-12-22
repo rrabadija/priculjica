@@ -26,7 +26,7 @@ class Editor {
     }
 
     writeSessionData = () => {
-        fetch('/priculjica/php/story.php', {
+        fetch('/php/story.php', {
             method: 'POST',
             body: JSON.stringify({
                 title: this.contentEditableTitle.innerHTML,

@@ -17,7 +17,7 @@
                     $_SESSION['title'] ?? '',
                     $_SESSION['text'] ?? '',
 
-                    '<a href="/priculjica/nova-prica" class="session_anchor"',
+                    '<a href="nova-prica" class="session_anchor"',
 
                     $_SESSION['image_src'] ?? '',
                     $_SESSION['alt_text'] ?? ''

@@ -215,7 +215,7 @@ const sideBar = new SideBar (
 	document.querySelector('.header_aside_button i:last-child'),
 );
 
-const header = new Header (
+export const header = new Header (
 	document.querySelector('main'),
 	document.querySelector('header'),
 	document.querySelector('header button'),

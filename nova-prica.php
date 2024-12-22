@@ -13,18 +13,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pričuljica<?=$_SESSION['user_role'] === 'admin' ? ' - Admin' : ''?></title>
 
-<base href="/priculjica/">
+<script src="/app/js/theme.js"></script>
 
-<script src="/priculjica/assets/js/theme.js"></script>
-	
-<base href="/priculjica/">
-<link rel="apple-touch-icon" sizes="180x180" href="/priculjica/assets/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/priculjica/assets/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/priculjica/assets/favicons/favicon-16x16.png">
-<link rel="manifest" href="/priculjica/assets/favicon/site.webmanifest">
-<link href="/priculjica/assets/css/nova-prica.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link href="/app/css/nova-prica.css" rel="stylesheet" type="text/css">
 
-<?=$_SESSION['user_role'] === 'admin' ? "<link href='/priculjica/assets/css/toolbar.css' rel='stylesheet' type='text/css'>" : ''?>
+<?=$_SESSION['user_role'] === 'admin' ? "<link href='/app/css/toolbar.css' rel='stylesheet' type='text/css'>" : ''?>
 
 </head>
 
@@ -72,9 +69,9 @@
 
 	<?=$login -> generateLogin()?>
 	
-	<script type="module" src="/priculjica/assets/js/story.js"></script>
+	<script type="module" src="/app/js/story.js"></script>
 
-	<?=$_SESSION['user_role'] === 'admin' ? "<script type='module' src='/priculjica/assets/js/editor.js'></script>" : ''?>
+	<?=$_SESSION['user_role'] === 'admin' ? "<script type='module' src='/app/js/editor.js'></script>" : ''?>
 	
 </body>
 </html>

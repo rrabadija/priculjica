@@ -1,4 +1,5 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
+    require_once 'connect.php';
     require_once 'helpers.php';
 
     class Login {
@@ -18,10 +19,12 @@
         }
 
         private function adminRedirect() {
-            $redirectURL = str_replace('?admin=true', '', $this -> redirectURL);
+            $redirectURL = str_replace('?admin', '', $this -> redirectURL);
 
-            if (($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['admin']) && $_GET['admin'] === 'true')) {
-                $this -> setUserRole('login');
+            if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['admin'])) {
+                if ($this -> session['user_role'] === 'user') {
+                    $this -> setUserRole('login');
+                }
 
                 header ("Location: $redirectURL");
 
@@ -69,19 +72,29 @@
 
                 return '<div class="login_form_wrapper">
 
-                            <label for="username">Korisničko ime:</label>
-                            <br>
-                            <input type="text" required>
-                            <br>
-                            <label for="password">Lozinka:</label>
-                            <br>
-                            <input type="password" required>
-                            <br>
-                            <button type="submit"></button>
+                            <label>Korisničko ime:</label>
+                            <input type="text">
+                            <label>Lozinka:</label>
+                            <input type="password">
+                            <button></button>
 
                         </div>
                         
-                        <script>
+                        <script type="module">
+                            import {header} from "/app/js/header.js";
+                            import {getURL} from "/app/js/helpers.js";
+
+                            let footer = null;
+
+                            if (getURL() === "") {
+                                import("/app/js/index.js")
+
+                                .then(module => {
+                                    footer = module.footer;
+
+                                    checkForTabIndex();
+                                });
+                            }
 
                             const login = document.querySelector(".login_form_wrapper");
 
@@ -94,6 +107,15 @@
                                         child.style.filter = "blur(20px)";
                                         child.style.pointerEvents = "none";
                                         child.style.transition = "none";
+
+                                        const preventTabIndex = element => {
+                                            Array.from(element.children).forEach(child => {
+                                                child.tabIndex = "-1";
+                                                preventTabIndex(child);
+                                            });
+                                        }
+                                        
+                                        preventTabIndex(child);
                                     }
                                 })
                             }
@@ -102,7 +124,7 @@
                                 const username = document.querySelector(".login_form_wrapper input:first-of-type").value;
                                 const password = document.querySelector(".login_form_wrapper input:last-of-type").value;
 
-                                fetch("/priculjica/php/login.php", {
+                                fetch("/php/login.php", {
 		                            method: "POST",
 		                            body: JSON.stringify({
                                         username: username,
@@ -112,6 +134,22 @@
 
                                 .then(response => response.json())
 	                            .then(data => window.location.href = data);
+                            });
+
+                            const checkForTabIndex = () => {
+                                if (header) {
+                                    header.headerTabIndex(-1, -1, -1);
+                                }
+
+                                if (footer && footer.lastButton) {
+                                    footer.lastButton.removeEventListener("keydown", footer.lastButtonHandler);
+                                }
+                            };
+
+                            document.addEventListener("DOMContentLoaded", () => {
+                                checkForTabIndex();
+                                
+                                window.addEventListener("resize", checkForTabIndex);
                             });
 
                         </script>';

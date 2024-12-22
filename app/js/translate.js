@@ -20,7 +20,7 @@ class Translate {
 			keys.push(encodeURIComponent(key));
 		});
 
-		const response = await fetch('/priculjica/php/language.php', {
+		const response = await fetch('/php/language.php', {
 			method: 'POST',	
 			body: JSON.stringify({
 				language: this.languageSelector.value,
@@ -93,7 +93,7 @@ class Translate {
 		localStorage.setItem('language', this.languageSelector.value);
 
 		if (currentLanguage && currentLanguage !== 'hr') {
-			fetch('/priculjica/php/language.php', {
+			fetch('/php/language.php', {
 				method: 'POST',
 				body: JSON.stringify({language: currentLanguage})
 			});
@@ -108,7 +108,7 @@ export function languageSelectorChange() {
 	const currentPage = getURL();
 
 	switch (currentPage) {
-		case 'priculjica':
+		case '':
 			headerLinks = {
 				'header.a-2' : document.querySelector('header a:nth-child(1)'),
 				'header.a-3' : document.querySelector('header a:nth-child(2)'),

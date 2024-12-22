@@ -8,7 +8,7 @@ window.onload = () => {
         return;
     }
 
-    fetch('/priculjica/php/audio-counter.php', {
+    fetch('/php/audio-counter.php', {
         method: 'POST',
         body: JSON.stringify({startFlag: startFlag})
     })
@@ -140,7 +140,7 @@ export default class AudioPlayer {
 		const currentTime = parseInt(this.audio.currentTime);
     	const audioDuration = parseInt(this.audio.duration);
 
-		fetch('/priculjica/php/audio-counter.php', {
+		fetch('/php/audio-counter.php', {
 			method: 'POST',
 			body: JSON.stringify({
 				currentTime: currentTime,

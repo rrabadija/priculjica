@@ -33,7 +33,7 @@
 			$GLOBALS['queries'] -> storyCount($URL);
 		}
 		else {
-			header('Location: /priculjica/ostale-price');
+			header('Location: ostale-price');
 
 			exit;
 		}

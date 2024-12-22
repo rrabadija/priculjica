@@ -11,16 +11,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pričuljica<?=$_SESSION['user_role'] === 'admin' ? ' - Admin' : ''?></title>
 
-<base href="/priculjica/">
-
-<script src="/priculjica/assets/js/theme.js"></script>
+<script src="/app/js/theme.js"></script>
 	
-<base href="/priculjica/">
-<link rel="apple-touch-icon" sizes="180x180" href="/priculjica/assets/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/priculjica/assets/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/priculjica/assets/favicons/favicon-16x16.png">
-<link rel="manifest" href="/priculjica/assets/favicon/site.webmanifest">
-<link href="/priculjica/assets/css/pisi-mi.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link href="/app/css/pisi-mi.css" rel="stylesheet" type="text/css">
 	
 </head>
 
@@ -68,7 +65,7 @@
 			
 			<div class="main_image_wrapper_image">
 			
-				<img src="/priculjica/assets/images/pisi-mi.jpg" alt="Poštanski sandučić vjeverice Pričuljice smješten u šumi i okružen gljivama i cvijećem.">
+				<img src="/assets/images/pisi-mi.jpg" alt="Poštanski sandučić vjeverice Pričuljice smješten u šumi i okružen gljivama i cvijećem.">
 			
 			</div>
 			
@@ -84,7 +81,7 @@
 
 	<?=$login -> generateLogin()?>
 	
-	<script type="module" src="/priculjica/assets/js/header.js"></script>
+	<script type="module" src="/app/js/header.js"></script>
 	
 </body>
 </html>

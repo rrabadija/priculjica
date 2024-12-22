@@ -34,7 +34,7 @@ keenSlider.on('slideChanged', () => {
 	}
 });
 
-new Footer (
+export const footer = new Footer (
 	document.querySelector('section:nth-child(3)'),
 	document.querySelector('.section_3_content_wrapper'),
 	document.querySelector('.observed_section_3'),

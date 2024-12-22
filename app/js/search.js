@@ -4,7 +4,7 @@ const searchResults = document.querySelector('section');
 searchInput.addEventListener('input', function() {
 	const query = searchInput.value.trim();
 
-	fetch('/priculjica/php/search.php', {
+	fetch('/php/search.php', {
 		method: 'POST',
 		body: JSON.stringify({query: query})
 	})

@@ -16,7 +16,7 @@
 			
                             <button>
                             
-                                <img src="/priculjica/assets/images/priculjica-logo.png" alt="">
+                                <img src="/assets/images/priculjica-logo.png" alt="">
                                 
                             </button>
                             
@@ -28,7 +28,7 @@
                 switch ($href) {
                     case 'POČETNA':
                     case 'HOME':
-                        $header .= '<a href="/priculjica/">';
+                        $header .= '<a href="/">';
 
                         break;
                     
@@ -36,29 +36,29 @@
                     case 'NEW STORY':
                         if ($_SESSION['user_role'] === 'user') {
                             $header .= $this -> headerURL
-                                ? '<a href="/priculjica/' . $this -> URLs[0] . '/' . $this -> headerURL . '">'
-                                : '<a href="/priculjica/' . $this -> URLs[0] . '">';
+                                ? '<a href="' . $this -> URLs[0] . '/' . $this -> headerURL . '">'
+                                : '<a href="' . $this -> URLs[0] . '">';
                         }
                         else {
-                            $header .= '<a href="/priculjica/' . $this -> URLs[0] . '">';
+                            $header .= '<a href="' . $this -> URLs[0] . '">';
                         }
 
                         break;
 
                     case 'OSTALE PRIČE':
                     case 'OTHER STORIES':
-                        $header .= '<a href="/priculjica/' . $this -> URLs[1] . '">';
+                        $header .= '<a href="' . $this -> URLs[1] . '">';
 
                         break;
 
                     case 'O MENI':
                     case 'ABOUT ME':
-                        $header .= '<a href="/priculjica/' . $this -> URLs[2] . '">';
+                        $header .= '<a href="' . $this -> URLs[2] . '">';
         
                         break;
 
                     default:
-                        $header .= '<a href="/priculjica/' . $this -> URLs[3] . '">';
+                        $header .= '<a href="' . $this -> URLs[3] . '">';
                 
                         break;
                 }
@@ -97,7 +97,7 @@
                             </div>'
 
                             . ($_SESSION['user_role'] === 'admin'
-                                ? '<form method="POST" action="/priculjica/php/login.php">
+                                ? '<form method="POST" action="/php/login.php">
 
                                         <input type="hidden" name="userRedirect" value="true">
                                         <button type="submit" style="cursor:pointer;color:white;" class="header_aside_user_redirect">' . $_SESSION['user_role'] . '</button>

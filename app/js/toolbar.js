@@ -96,7 +96,7 @@ export default class Toolbar {
     }
 
     generateToolbarControls = (toolbarControl) => {
-        fetch('/priculjica/php/toolbar.php', {
+        fetch('/php/toolbar.php', {
             method: 'POST',
             body: JSON.stringify({toolbarControl: toolbarControl})
         })

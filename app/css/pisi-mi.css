@@ -52,8 +52,8 @@ input {
 	font-size: 25px;
 }
 
-input:focus {
-	outline: none;
+input:focus-visible {
+	outline: 2px solid black;
 }
 
 .main_input_wrapper_row input:nth-child(2) {
@@ -71,8 +71,8 @@ textarea {
 	resize: none;
 }
 
-textarea:focus {
-	outline: none;
+textarea:focus-visible {
+	outline: 2px solid black;
 }
 
 main button {

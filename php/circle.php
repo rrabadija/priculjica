@@ -29,7 +29,7 @@
 					$_SESSION['title'] ?? '',
 					$_SESSION['text'] ?? '',
 
-					'<a href="/priculjica/nova-prica"',
+					'<a href="nova-prica"',
 					
 					$_SESSION['image_src'] ?? '',
 					$_SESSION['alt_text'] ?? ''
