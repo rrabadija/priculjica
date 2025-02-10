@@ -95,7 +95,7 @@
             if ($currentTime / $audioDuration >= $listenPercentage && !$_SESSION['timeFlag']) { //If time exceeds n percentage, count as listen
                 $_SESSION['timeFlag'] = true;
                 
-                $GLOBALS['queries'] -> audioCount($_SESSION['audio_counter_filename']);
+                Queries::audioCount($_SESSION['audio_counter_filename']);
             
                 $response = "Audio zapis poslušan!\n";
             }

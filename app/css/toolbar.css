@@ -1,9 +1,9 @@
-.toolbar_height {
+.toolbar-height {
     height: 50%;
     position: absolute;
 }
 
-.toolbar_toggle_button {
+.toolbar-toggle-button {
     width: 60px;
     height: 60px;
     position: fixed;
@@ -17,17 +17,17 @@
     transition: font-size 150ms ease-in-out;
 }
 
-.toolbar_toggle_button:hover {
+.toolbar-toggle-button:hover {
     font-size: 40px;
 }
 
-.toolbar_toggle_button i {
+.toolbar-toggle-button i {
     position: relative;
     top: 2px;
     transition: color 150ms ease-in-out;
 }
 
-.toolbar_toggle_button.expand i {
+.toolbar-toggle-button.expand i {
     color: #F5D1C3;
 }
 
@@ -53,13 +53,13 @@
     box-shadow: -8px -1px 16px -10px rgba(0,0,0,0.6);
 }
 
-.toolbar_buttons_container {
+.toolbar-buttons-container {
     position: absolute;
     bottom: 60px;
     overflow-y: scroll;
 }
 
-.toolbar_buttons_container button {
+.toolbar-buttons-container button {
     width: 60px;
     height: 60px;
     position: relative;
@@ -71,16 +71,16 @@
     transition: font-size 100ms ease-in-out;
 }
 
-.toolbar_buttons_container button:hover {
+.toolbar-buttons-container button:hover {
     font-size: 25px;
 }
 
-.toolbar_buttons_container button.active {
+.toolbar-buttons-container button.active {
     font-size: 25px;
     color: #F5D1C3;
 }
 
-.toolbar_controls_container {
+.toolbar-controls-container {
     width: 60px;
     height: 60px;
     position: fixed;
@@ -93,13 +93,13 @@
     transition: width 300ms ease-in-out;
 }
 
-.toolbar_controls_container.expand {
+.toolbar-controls-container.expand {
     width: 350px;
     height: 50%;
     overflow: scroll;
 }
 
-.toolbar_controls {
+.toolbar-controls {
     width: 290px;
     padding: 30px 0;
     position: absolute;
@@ -110,11 +110,11 @@
     gap: 25px;
 }
 
-.toolbar_controls input[type="file"] {
+.toolbar-controls input[type="file"] {
     display: none;
 }
 
-.toolbar_label {
+.toolbar-label {
     width: 175px;
     height: 175px;
     display: flex;
@@ -126,35 +126,35 @@
     background-size: contain;
 }
 
-.toolbar_label:hover {
+.toolbar-label:hover {
     cursor: pointer;
 }
 
-.toolbar_label i {
+.toolbar-label i {
     font-size: 30px;
     color: white;
 }
 
-.toolbar_controls input[type="text"] {
+.toolbar-controls input[type="text"] {
     width: 200px;
     height: 35px;
 	padding: 0 10px;
 	border-radius: 50px;
     border: none;
     background-color: #F5D1C3;
-    font-family: 'caroni_regular';
+    font-family: 'caroni-regular';
     font-size: 17.5px;
 }
 
-.toolbar_controls p {
+.toolbar-controls p {
     height: 0;
     text-align: center;
-    font-family: 'caroni_regular';
+    font-family: 'caroni-regular';
     font-size: 25px;
     color: white;
 }
 
-.toolbar_controls button {
+.toolbar-controls button {
     width: 150px;
 	height: 40px;
     position: relative;
@@ -167,12 +167,12 @@
 	color: rgba(90,90,90,1.00) !important;
 }
 
-.toolbar_controls button:hover:before {
+.toolbar-controls button:hover:before {
 	width: 150px;
 	height: 150px;
 }
 
-.toolbar_controls button:before {
+.toolbar-controls button:before {
     content: '';
 	width: 0px;
 	height: 0px;
@@ -188,7 +188,7 @@
 	transition: width 400ms ease-in-out, height 400ms ease-in-out;
 }
 
-.toolbar_controls button:after {
+.toolbar-controls button:after {
     content: 'Umetni';
     margin: auto;
     position: absolute;
@@ -223,7 +223,7 @@ input[type="number"] {
     color: white;
 }
 
-input[type="number"], .section_header h1:focus, .section_paragraph:focus {
+input[type="number"], .section-header h1:focus, .section-paragraph:focus {
     border: none;
     outline: none;
 }

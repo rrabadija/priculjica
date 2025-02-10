@@ -99,7 +99,7 @@
         if (isset($_POST['write']) && !empty($_POST['write'])) { //Write a new 'url' nod
             $write = setChar(sanitize($_POST['write']));
             
-            $naslovCheck = $GLOBALS['queries'] -> sitemap($write);
+            $naslovCheck = Queries::sitemap($write);
 
             if (!$naslovCheck) { //If the record does not already exist in the database, write a new 'url' node
                 $url = $xml -> createElement('url');
@@ -148,7 +148,7 @@
     }
 
     function titleCheck($loc, $edit) { //If the edited or deleted story is in the last three database rows (present on the homepage), edit the 'lastmod' node of the homepage 'url' node
-        $naslovCheck = $GLOBALS['queries'] -> titleCheck();
+        $naslovCheck = Queries::titleCheck();
 
         foreach ($naslovCheck as $naslov) {
             if (setChar($naslov['title']) === $edit) {

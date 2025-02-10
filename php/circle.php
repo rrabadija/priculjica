@@ -2,71 +2,30 @@
 	require_once 'connect.php';
 	require_once 'queries.php';
 	require_once 'helpers.php';
-
-	$rows = $GLOBALS['queries'] -> circle();
+	require_once 'template.php';
 
 	class Circle {
-		private $rows;
+		private static $rows;
 
-		public function __construct($rows) {
-			$this -> rows = $rows;
+		public static function init() {
+            self::$rows = Queries::circle();
+        }
+
+		private static function template() {
+			return Template::render('circle.html',
+				[
+					'title' => '',
+					'text' => '',
+					'href' => '',
+					'imageSrc' => '',
+					'altText' => ''
+				]
+			);
 		}
 
-		public function generateCircle($i) {
-			if (isset($this -> rows[$i])) {
-				return $this -> circle(
-					$this -> rows[$i]['title'],
-					$this -> rows[$i]['text'],
-
-					'<a href="nova-prica/' . setChar(sanitize($this -> rows[$i]['title'])),
-
-					$this -> rows[$i]['image_src'],
-					$this -> rows[$i]['alt_text']
-				);
-			}
-			else if (isset($_SESSION['title'], $_SESSION['text']) && !empty($_SESSION['title'] || $_SESSION['text']) && $i === -1) {
-				return $this -> circle(
-					$_SESSION['title'] ?? '',
-					$_SESSION['text'] ?? '',
-
-					'<a href="nova-prica"',
-					
-					$_SESSION['image_src'] ?? '',
-					$_SESSION['alt_text'] ?? ''
-				);
-			}
-		}
-
-		private function circle($title, $text, $link, $imageSrc, $altText) {
-			$title = sanitize($title ?? '');
-			$text = sanitize($text ?? '');
-			$imageSrc = sanitize($imageSrc ?? '');
-			$altText = sanitize($altText ?? '');
-
-			$circle = '<div class="section_2_content_circle_image_text_wrapper">
-
-							<h2>' . $title . '</h2>
-
-							<p>' . limitText($text, 9) . '</p>
-
-							<div class="section_1_content_button">
-
-								' . $link . ' tabindex="-1">
-				
-									<button></button>
-
-								</a>
-							
-							</div>
-
-						</div>';
-					
-			if (!empty($imageSrc)) {
-				$circle .= '<img src="' . $imageSrc . '" alt="' . ($altText !== '' ? $altText : '') . '">';
-			}
-
-			return $circle;
+		public static function generateCircle() {
+			return self::template();
 		}
 	}
 
-	$circle = new Circle($rows);
+	Circle::init();

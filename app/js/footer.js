@@ -1,8 +1,7 @@
 export default class Footer {
-	constructor(section, sectionContent, observedElement, footer) {
+	constructor(section, observed, footer) {
 		this.section = section;
-		this.sectionContent = sectionContent;
-		this.observedElement = observedElement;
+		this.observed = observed;
 		this.footer = footer;
 
 		this.observer();
@@ -41,7 +40,7 @@ export default class Footer {
 			}
 		}, {threshold: 1});
 
-		observer.observe(this.observedElement);
+		observer.observe(this.observed);
 	}
 
 	footerScroll = (event) => {
@@ -77,12 +76,10 @@ export default class Footer {
 		document.documentElement.style.overflowY = 'hidden';
 		document.body.style.overflowY = 'hidden';
 
-		this.section.classList.add('scrolled_footer');
+		this.section.classList.add('scroll');
 
-		this.sectionContent.classList.add('scrolled_footer');
-
-		this.footer.classList.remove('unscrolled');
-		this.footer.classList.add('scrolled');
+		this.footer.classList.remove('unscroll');
+		this.footer.classList.add('scroll');
 
 		this.footer.addEventListener('animationend', (event) => {
 			window.addEventListener('scroll', this.lockScroll, { passive: false});
@@ -97,11 +94,10 @@ export default class Footer {
 	}
 
 	hideFooter = () => {
-		this.section.classList.remove('scrolled_footer');
-		this.sectionContent.classList.remove('scrolled_footer');
+		this.section.classList.remove('scroll');
 
-		this.footer.classList.add('unscrolled');
-		this.footer.classList.remove('scrolled');
+		this.footer.classList.add('unscroll');
+		this.footer.classList.remove('scroll');
 
 		document.documentElement.style.overflowY = '';
 
@@ -111,7 +107,7 @@ export default class Footer {
 
 			document.body.style.overflowY = '';
 
-			this.footer.classList.remove('unscrolled');
+			this.footer.classList.remove('unscroll');
 
 			this.footerScrollTrigger = false;
 

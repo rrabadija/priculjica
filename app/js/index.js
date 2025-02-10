@@ -1,17 +1,20 @@
 import './header.js';
-import {createSection1Circle, createSection2Circle} from './circle.js';
+import Bubble from './bubble.js';
 import './keenSlider.js';
 import Footer from './footer.js';
 
-const keenSliderButton = document.querySelector('.keen-slider__button button');
-const keenSliderArrow = document.querySelector('.keen-slider__button button i');
+const keenSliderButton = document.querySelector('.keen-slider button');
+const keenSliderArrow = document.querySelector('.keen-slider button i');
 
-createSection1Circle();
-	
-createSection2Circle();
+new Bubble (
+	document.querySelector('.section-1--image'),
+	document.querySelector('section:nth-child(2)'),
+	document.querySelector('.section-2--circle')
+);
 
 const keenSlider = new KeenSlider('.keen-slider', {
-	loop: false
+	loop: false,
+	slides: {perView: 1.3, spacing: 200, origin: 'center'}
 });
 
 keenSliderButton.addEventListener('click', () => {
@@ -36,7 +39,6 @@ keenSlider.on('slideChanged', () => {
 
 export const footer = new Footer (
 	document.querySelector('section:nth-child(3)'),
-	document.querySelector('.section_3_content_wrapper'),
-	document.querySelector('.observed_section_3'),
+	document.querySelector('.section-3--observed'),
 	document.querySelector('footer')
 );

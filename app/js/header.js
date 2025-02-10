@@ -1,5 +1,6 @@
-import SideBar from './sidebar.js';
+import SideBar from './sideBar.js';
 import {languageSelector, languageSelectorChange} from './translate.js';
+import './button.js';
 import {throttle} from './helpers.js';
 
 export default class Header {
@@ -48,12 +49,12 @@ export default class Header {
 	}
 
 	toggleHeader = () => {
-		document.body.classList.toggle('header');
+		document.body.classList.toggle('expand');
 
 		this.header.classList.toggle('expand');
 		this.overlay.classList.toggle('expand');
-		this.main.classList.toggle('header');
-		this.footer.classList.toggle('header');
+		this.main.classList.toggle('expand');
+		this.footer.classList.toggle('expand');
 
 		this.overlay.addEventListener('click', this.closeHeader);
 
@@ -110,19 +111,7 @@ export default class Header {
 	}
 
 	headerTabIndex = (value1, value2, value3) => {
-		const sideBarElements = Array.from(this.sideBar.children);
-		
-		sideBarElements.forEach(element => {
-			if (element.children.length > 0) {
-				sideBarElements.push(...Array.from(element.children));
-				
-				const index = sideBarElements.indexOf(element);
-
-				if (index === 1) {
-					sideBarElements.splice(index, 1);
-				}
-			}
-		});
+		const sideBarElements = Array.from(this.sideBar.firstElementChild.children);
 
 		this.headerLinks.forEach(link => {
 			link.tabIndex = `${value1}`
@@ -149,7 +138,7 @@ export default class Header {
 	}
 
 	sideBarTabIndex = () => {
-		const sideBarLastChild = this.sideBar.children[this.sideBar.children.length - 1];
+		const sideBarLastChild = this.sideBar.firstElementChild.children[this.sideBar.firstElementChild.children.length - 1];
 
 		this.screenWidth = window.innerWidth;
 
@@ -193,16 +182,16 @@ export default class Header {
 
 	headerLinksDots = () => {
 		this.headerLinks.forEach(link => {
-			const headerDots = link.querySelectorAll('.header_links_dot');
+			const headerDots = link.querySelectorAll('.header--links--dot');
 
 			link.addEventListener('mouseover', () => {
-				headerDots.forEach(dot => dot.classList.add("hovered"));
-				headerDots.forEach(dot => dot.classList.remove("unhovered"));
+				headerDots.forEach(dot => dot.classList.add("hover"));
+				headerDots.forEach(dot => dot.classList.remove("unhover"));
 			});
 
 			link.addEventListener('mouseout', () => {
-				headerDots.forEach(dot => dot.classList.add("unhovered"));
-				headerDots.forEach(dot => dot.classList.remove("hovered"));
+				headerDots.forEach(dot => dot.classList.add("unhover"));
+				headerDots.forEach(dot => dot.classList.remove("hover"));
 			});
 		});
 	}
@@ -210,16 +199,16 @@ export default class Header {
 
 const sideBar = new SideBar (
 	document.querySelector('header aside'),
-	document.querySelector('.header_aside_button'),
-	document.querySelector('.header_aside_button i:first-child'),
-	document.querySelector('.header_aside_button i:last-child'),
+	document.querySelector('.header--button-aside-toggle'),
+	document.querySelector('.header--button-aside-toggle i:first-child'),
+	document.querySelector('.header--button-aside-toggle i:last-child'),
 );
 
 export const header = new Header (
 	document.querySelector('main'),
 	document.querySelector('header'),
-	document.querySelector('header button'),
-	document.querySelectorAll('header a'),
+	document.querySelector('.header--logo button'),
+	document.querySelectorAll('.header--links a'),
 
 	sideBar.sideBar,
 	sideBar.sideBarButton,

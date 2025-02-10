@@ -44,15 +44,15 @@ new Editor (
 let toolbarButtons;
 
 new Toolbar (
-    document.querySelector('.toolbar_height'),
-    document.querySelector('.toolbar_toggle_button'),
+    document.querySelector('.toolbar-height'),
+    document.querySelector('.toolbar-toggle-button'),
     document.querySelector('.toolbar'),
-    document.querySelector('.toolbar_buttons_container'),
-    
+    document.querySelector('.toolbar-buttons-container'),
+        
     toolbarButtons = [
-        document.querySelector('.toolbar_image'),
-        document.querySelector('.toolbar_audio')
+        document.querySelector('.toolbar-image'),
+        document.querySelector('.toolbar-audio')
     ],
 
-    document.querySelector('.toolbar_controls_container')
+    document.querySelector('.toolbar-controls-container')
 );

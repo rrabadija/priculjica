@@ -21,7 +21,7 @@
                 $keys = explode(',', ($GLOBALS['FETCH']['key']));
 
                 foreach ($keys as $key) {
-                    $translation = $GLOBALS['queries'] -> translate($key, $language);
+                    $translation = Queries::translate($key, $language);
 
                     $translations[$key] = sanitizeHTML($translation['translation']);
                 }
@@ -32,7 +32,7 @@
     }
 
     function setLanguage($key) {   
-        $translations = $GLOBALS['queries'] -> translate($key, $_SESSION['language']);
+        $translations = Queries::translate($key, $_SESSION['language']);
 
         return sanitizeHTML($translations['translation'] ?? '');
     }

@@ -39,11 +39,11 @@ footer.expand {
 }
 
 .footer_links a:first-of-type {
-	background-color: var(--notindex-footerlink-first-of-type-color);
+	background-color: var(--color-jovial);
 }
 
 .footer_links a:last-of-type {
-	background-color: var(--notindex-footerlink-last-of-type-color);
+	background-color: var(--color-tidewater);
 }
 
 .footer_links a:before {
@@ -84,7 +84,7 @@ footer p {
 		pointer-events: all;
 	}
 
-	footer.header {
+	footer.expand {
 		pointer-events: none;
 	}
 

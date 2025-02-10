@@ -1,0 +1,128 @@
+section:nth-child(3) {
+    height: calc(100vh - 80px);
+    padding-top: 0;
+    overflow: hidden;
+    background-color: var(--section-color);
+    transition: filter 300ms ease-in-out, background-color 300ms ease-in-out;
+}
+
+section:nth-child(3).scroll {
+    filter: brightness(0.8);
+}
+
+.section-3--text {
+    width: 72%;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    margin: auto;
+    left: 4%;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    user-select: none;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    background-color: var(--color-jovial);
+    font-size: clamp(1rem, 0.5294rem + 0.9804vw, 2rem);
+    pointer-events: none;
+}
+
+.section-3--text {
+	cursor: grab;
+}
+
+.section-3--text:active {
+	cursor: grabbing;
+}
+
+.section-3--text * {
+    pointer-events: all;
+}
+
+.section-3--text p {
+    z-index: 2;
+	text-align: center;
+    line-height: 1.6;
+    color: var(--font-color);
+}
+
+.section-3--text button {
+	width: 48px;
+    height: 48px;
+    margin: auto;
+    position: absolute;
+    top: 16rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 50%;
+    background-color: var(--color-cloudburst);
+    font-size: 24px;
+	color: white;
+}
+
+.section-3--text button i {
+	transition: transform 400ms ease-in-out;
+}
+
+.section-3--text button i.active {
+	transform: rotate(-180deg);
+}
+
+.section-3--image {
+    width: 45%;
+	height: 100%;
+    margin-left: auto;
+    display: flex;
+    align-items: flex-end;
+	justify-content: flex-end;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.section-3--image img {
+    max-width: 100%;
+	max-height: 100%;
+}
+
+.section-3--observed {
+	position: absolute;
+	top: 99%;
+}
+
+@media (max-width: 768px) {
+
+    .section-3--text {
+        font-size: clamp(0.5rem, 0.5rem + 1.0417vw, 1rem);
+    }
+
+    .section-3--observed {
+		display: none;
+	}
+
+}
+
+@media (max-width: 768px) and (min-height: 600px) and (orientation: portrait) {
+
+    .section-3--text {
+        width: 88%;
+        top: 8%;
+        left: 0;
+        right: 0;
+    }
+
+    .section-3--image img {
+        max-height: 50%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .section-3--text button {
+        top: 15rem;
+    }
+
+}

@@ -1,0 +1,142 @@
+.section-1--image--bubble,
+.section-2--bubble {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.section-1--image--bubble {
+    animation-name: section-1-bubble-animation;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.section-1--image--bubble-1 {
+    width: 82.5%;
+    padding-bottom: 82.5%;
+    top: 7%;
+	left: 17%;
+    z-index: 3;
+    background: linear-gradient(347deg, #F5D1C3 20%, #C4D7D1 78%);
+    animation-duration: 2500ms;
+}
+
+.section-1--image--bubble-2 {
+    width: 85%;
+    padding-bottom: 85%;
+    left: -1%;
+    z-index: 2;
+    background: linear-gradient(347deg, #F5D1C3 20%, #C4D7D1 78%);
+    animation-duration: 2700ms;
+}
+
+.section-1--image--bubble-3 {
+    width: 67.5%;
+    padding-bottom: 67.5%;
+    left: 8%;
+    z-index: 4;
+    background-color: white;
+    opacity: 0.33;
+    animation-duration: 2300ms;
+}
+
+.section-1--image--bubble-4 {
+    width: 70%;
+    padding-bottom: 70%;
+    top: 18%;
+    left: 9%;
+    z-index: 4;
+    background-color: white;
+    opacity: 0.33;
+    animation-duration: 2900ms;
+}
+
+.section-1--image--bubble-5 {
+    width: 67.5%;
+    padding-bottom: 67.5%;
+    top: 12.5%;
+    left: 26%;
+    z-index: 4;
+    background-color: white;
+    opacity: 0.33;
+    animation-duration: 3200ms;
+}
+
+.section-1--image--bubble-6 {
+    width: 77.5%;
+    padding-bottom: 77.5%;
+    top: -5.5%;
+    left: 13%;
+    z-index: 1;
+    background: linear-gradient(90deg, #C4D7D1 20%, #F5D1C3 78%);
+    animation-duration: 3500ms;
+}
+
+@keyframes section-1-bubble-animation {
+
+	0% {
+		transform: scaleX(1);
+	}
+
+	25% {
+		transform: scaleX(1.02);
+	}
+
+	50% {
+		transform: scaleX(1);
+	}
+
+	75% {
+		transform: scaleX(0.98);
+	}
+    
+	100% {
+		transform: scaleX(1);
+	}
+
+}
+
+.section-1--image--bubble-7 {
+	width: 12%;
+	padding-bottom: 12%;
+    top: 83.5%;
+	left: 86%;
+    z-index: 5;
+	background-color: var(--color-tidewater);
+	opacity: 0.8;
+	animation-name: section-1-bubble-animation-floating !important;
+    animation-duration: 5000ms;
+}
+
+.section-1--image--bubble-8 {
+	width: 5.5%;
+	padding-bottom: 5.5%;
+    top: 73.5%;
+	left: 99%;
+    z-index: 5;
+	background-color: var(--color-tidewater);
+	animation-name: section-1-bubble-animation-floating !important;
+    animation-duration: 5000ms;
+}
+
+@keyframes section-1-bubble-animation-floating {
+
+	0% {
+		transform: translateY(0px);
+	}
+
+	50% {
+		transform: translateY(-16px);
+	}
+
+	100% {
+		transform: translateY(0px);
+	}
+
+}
+
+.section-2--bubble {
+    width: var(--section-2--bubble-diameter);
+    padding-bottom: var(--section-2--bubble-diameter);
+    background-color: var(--section-2--bubble-color);
+}
+

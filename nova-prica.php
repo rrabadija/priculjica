@@ -1,8 +1,9 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
+	require_once 'php/helpers.php';	
+	require_once 'php/template.php';
 	require_once 'php/header.php';
 	require_once 'php/toolbar.php';
 	require_once 'php/story.php';
-	require_once 'php/footer.php';
 	require_once 'php/language.php';
 	require_once 'php/login.php';
 ?>
@@ -27,13 +28,9 @@
 
 <body>
 	
-	<header>
-		
-		<?=$header -> generateHeader([setLanguage("header.a-1"), setLanguage("header.a-3"), setLanguage("header.a-4"), setLanguage("header.a-5")])?>
+	<?=Header::generateHeader('nova-prica')?>
 
-	</header>
-
-	<?=$_SESSION['user_role'] === 'admin' ? $toolbar -> generateToolbarStory() : ''?>
+	<?=$_SESSION['user_role'] === 'admin' ? Template::render('toolbar-story.html') : ''?>
 	
 	<main>
 		
@@ -49,7 +46,7 @@
 				
 			</div>
 
-			<?=$_SESSION['user_role'] === 'user' ? (isset($rows) ? audioPlayer($audioBool, $audioSrc) : '') : audioPlayer($_SESSION['audioBool'] ?? '', $_SESSION['audioSrc'] ?? '')?>
+			<?=$_SESSION['user_role'] === 'user' ? ((isset($rows) && $audioBool === true) ? Template::render('audio-player.html', ['audioSrc' => $audioSrc]) : ''): ($_SESSION['audioBool'] ?? '' ? Template::render('audio-player.html', ['audioSrc' => $_SESSION['audioSrc']]) : '')?>
 			
 			<div <?=$_SESSION['user_role'] === 'admin' ? "contenteditable='true' spellcheck='false' data-placeholder-title='Tekst...'" : ''?> class="section_paragraph">
 				
@@ -61,17 +58,13 @@
 		
 	</main>
 
-	<footer>
-				
-		<?=generateFooter()?>
-				
-	</footer>
+	<?=Template::render('footer.html', ['date' => date("Y"), 'footer.p' => setLanguage("footer.p")])?>
 
-	<?=$login -> generateLogin()?>
+	<?=Login::generateLogin()?>
 	
 	<script type="module" src="/app/js/story.js"></script>
 
 	<?=$_SESSION['user_role'] === 'admin' ? "<script type='module' src='/app/js/editor.js'></script>" : ''?>
-	
+
 </body>
 </html>

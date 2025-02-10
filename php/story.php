@@ -2,7 +2,6 @@
 	require_once 'connect.php';
 	require_once 'queries.php';
 	require_once 'helpers.php';
-    require_once 'audio-player.php';
 	require_once 'audio-counter.php';
 
 	$title = '';
@@ -16,11 +15,11 @@
 			$URL = urldecode(htmlspecialchars($_GET['title'] ?? ''));
 			$URL = str_replace('-', ' ', $URL); //Replace the spaces with a dash
 
-			$rows = $GLOBALS['queries'] -> story($URL);
+			$rows = Queries::story($URL);
 
 			$title = sanitize($rows['title'] ?? '');
 			$text = sanitizeHTML($rows['text'] ?? '');
-			$audioBool = intval($rows['audio_bool'] ?? null);
+			$audioBool = (isset($rows['audio_bool']) ? (bool) $rows['audio_bool'] : null);
 			$audioSrc = sanitize($rows['audio_src'] ?? '');
 			$audioDuration = intval($rows['audio_duration'] ?? null);
 
@@ -30,7 +29,7 @@
 				$_SESSION['audio_counter_duration'] = $audioDuration;
 			}
 
-			$GLOBALS['queries'] -> storyCount($URL);
+			Queries::storyCount($URL);
 		}
 		else {
 			header('Location: ostale-price');

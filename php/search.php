@@ -11,7 +11,7 @@
                 $query = sanitize($FETCH['query'] ?? '');
                 $search = '%' . $query . '%';
 
-                $results = $GLOBALS['queries'] -> search($search);
+                $results = Queries::search($search);
 
                 if ($results) {
                     $regex = '/\b' . preg_quote($query, '/') . '/i';

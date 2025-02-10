@@ -1,0 +1,69 @@
+.login {
+	width: 240px;
+	height: 240px;
+	margin: auto;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+  	right: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	border: none;
+	border-radius: 24px;
+	z-index: 999;
+	background-color: var(--color-cloudburst);
+	text-align: center;
+	color: white;
+}
+
+.login input {
+	width: 152px;
+	height: 24px;
+	padding: 0 8px;
+    background-color: var(--color-tidewater);
+    font-size: 16px;
+}
+
+.login button:first-child {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	border-radius: 50%;
+	background-color: var(--color-tidewater);
+	font-size: 16px;
+	color: var(--color-cloudburst);
+}
+
+.login button:last-child {
+	width: 96px;
+	height: 32px;
+	margin-top: 8px;
+	font-size: 12px;
+}
+
+.login button:last-child:hover:before,
+.login button:last-child:active i,
+.login button:last-child i.active {
+	width: 96px;
+	height: 96px;
+}
+
+.login button:last-child:after {
+	content: var(--CTA-login);
+}
+
+.login button:last-child:active:after,
+.login button:last-child.active:after {
+	color: var(--color-cloudburst);
+}
+
+.login button:last-child:active i,
+.login button:last-child i.active {
+	background-color: white;
+}

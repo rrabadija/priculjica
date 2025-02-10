@@ -2,113 +2,78 @@
     require_once 'connect.php';
     require_once 'helpers.php';
     require_once 'queries.php';
+    require_once 'language.php';
+    require_once 'template.php';
 
     class Header {
-        private $headerURL;
-        private $URLs = ['nova-prica', 'ostale-price', 'o-meni', 'pisi-mi'];
+        private static $headerURL;
 
-        public function __construct() {
-            $this -> headerURL = setChar(sanitize($GLOBALS['queries'] -> header()));
+        public static function init() {
+            self::$headerURL = setChar(sanitize(Queries::header()));
         }
 
-        public function generateHeader($hrefs) {
-            $header = '<div class="header_logo_wrapper">
-			
-                            <button>
-                            
-                                <img src="/assets/images/priculjica-logo.png" alt="">
-                                
-                            </button>
-                            
-                        </div>
-                        
-                        <div class="header_links_wrapper">';
+        private static function storyURL() {
+            return ($_SESSION['user_role'] === 'user' && self::$headerURL) ? 'nova-prica/' . self::$headerURL : 'nova-prica';
+        }
 
-            foreach($hrefs as $href) {
-                switch ($href) {
-                    case 'POČETNA':
-                    case 'HOME':
-                        $header .= '<a href="/">';
+        private static function template($URLs, $anchors) {
+            return Template::render('header.html',
+                [
+                    'href' => $URLs,
+                    'anchor' => $anchors,
+                    'logout' => ($_SESSION['user_role'] === 'admin') ? Template::render('logout.html') : ''
+                ]
+            );
+        }
 
-                        break;
-                    
-                    case 'NOVA PRIČA':
-                    case 'NEW STORY':
-                        if ($_SESSION['user_role'] === 'user') {
-                            $header .= $this -> headerURL
-                                ? '<a href="' . $this -> URLs[0] . '/' . $this -> headerURL . '">'
-                                : '<a href="' . $this -> URLs[0] . '">';
-                        }
-                        else {
-                            $header .= '<a href="' . $this -> URLs[0] . '">';
-                        }
+        public static function generateHeader($file) {
+            switch($file) {
+                case 'index':
 
-                        break;
+                    $URLs = [self::storyURL(), 'ostale-price', 'o-meni', 'pisi-mi'];
+                    $anchors = [setLanguage('header.a-2'), setLanguage('header.a-3'), setLanguage('header.a-4'), setLanguage('header.a-5')];
 
-                    case 'OSTALE PRIČE':
-                    case 'OTHER STORIES':
-                        $header .= '<a href="' . $this -> URLs[1] . '">';
+                    return self::template($URLs, $anchors);
 
-                        break;
-
-                    case 'O MENI':
-                    case 'ABOUT ME':
-                        $header .= '<a href="' . $this -> URLs[2] . '">';
-        
-                        break;
-
-                    default:
-                        $header .= '<a href="' . $this -> URLs[3] . '">';
+                break;
                 
-                        break;
-                }
+                case 'nova-prica':
+                    
+                    $URLs = ['/', 'ostale-price', 'o-meni', 'pisi-mi'];
+                    $anchors = [setLanguage('header.a-1'), setLanguage('header.a-3'), setLanguage('header.a-4'), setLanguage('header.a-5')];
 
-                $header .= '<div class="header_links_dot"></div>
+                    return self::template($URLs, $anchors);
 
-                            ' . $href . '
+                break;
 
-                        </a>';
+                case 'ostale-price':
+                    
+                    $URLs = ['/', self::storyURL(), 'o-meni', 'pisi-mi'];
+                    $anchors = [setLanguage('header.a-1'), setLanguage('header.a-2'), setLanguage('header.a-4'), setLanguage('header.a-5')];
+
+                    return self::template($URLs, $anchors);
+
+                break;
+
+                case 'o-meni':
+                    
+                    $URLs = ['/', self::storyURL(), 'ostale-price', 'pisi-mi'];
+                    $anchors = [setLanguage('header.a-1'), setLanguage('header.a-2'), setLanguage('header.a-3'), setLanguage('header.a-5')];
+
+                    return self::template($URLs, $anchors);
+
+                break;
+
+                case 'pisi-mi':
+                    
+                    $URLs = ['/', self::storyURL(), 'ostale-price', 'o-meni'];
+                    $anchors = [setLanguage('header.a-1'), setLanguage('header.a-2'), setLanguage('header.a-3'), setLanguage('header.a-4')];
+
+                    return self::template($URLs, $anchors);
+                    
+                break;
             }
-                            
-                $header .= '<button class="header_aside_button">
-
-			                    <i class="fa fa-cog"></i>
-
-			                    <i class="fa fa-close"></i>
-
-		                    </button>
-
-                        </div>
-                                    
-                        <aside>
-
-                            <select class="header_aside_language_select">
-
-                                <option value="hr">Hrvatski</option>
-                                <option value="en">Engleski</option>
-
-                            </select>
-
-                            <div class="header_aside_darkmode_select_wrapper">
-
-                                <input type="checkbox">
-                                <label>Darkmode</label>
-                                                
-                            </div>'
-
-                            . ($_SESSION['user_role'] === 'admin'
-                                ? '<form method="POST" action="/php/login.php">
-
-                                        <input type="hidden" name="userRedirect" value="true">
-                                        <button type="submit" style="cursor:pointer;color:white;" class="header_aside_user_redirect">' . $_SESSION['user_role'] . '</button>
-
-                                    </form>'
-                                : '') .
-                            
-                        '</aside>';
-            
-            return $header;
         }
     }
 
-    $header = new Header;
+    Header::init();

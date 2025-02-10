@@ -36,7 +36,7 @@ class Theme {
 document.addEventListener("DOMContentLoaded", () => {
 
     new Theme (
-        document.querySelector('.header_aside_darkmode_select_wrapper input')
+        document.querySelector('header aside input')
     );
 
 });

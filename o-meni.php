@@ -1,6 +1,6 @@
 <?php header('Content-Type: text/html; charset=UTF-8');
+	require_once 'php/template.php';
     require_once 'php/header.php';
-	require_once 'php/footer.php';
 	require_once 'php/language.php';
 	require_once 'php/login.php';
 ?>
@@ -23,11 +23,7 @@
 
 <body>
 	
-	<header>
-
-		<?=$header -> generateHeader([setLanguage("header.a-1"), setLanguage("header.a-2"), setLanguage("header.a-3"), setLanguage("header.a-5")])?>
-		
-	</header>
+	<?=Header::generateHeader('o-meni')?>
 	
 	<main>
 		
@@ -114,17 +110,13 @@
 				
 			</div>
 			
-			<footer>
-				
-				<?=generateFooter()?>
-				
-			</footer>
+			<?=Template::render('footer.html', ['date' => date("Y"), 'footer.p' => setLanguage("footer.p")])?>
 			
 		</section>
 		
 	</main>
 
-	<?=$login -> generateLogin()?>
+	<?=Login::generateLogin()?>
 	
 	<script type="module" src="/app/js/header.js"></script>
 	

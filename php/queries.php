@@ -2,101 +2,102 @@
     require_once 'connect.php';
 
     class Queries {
-        private $PDO;
-        private $stmt = null;
+        private static $PDO;
 
-        public function __construct($PDO) {
-            $this -> PDO = $PDO;
+        public static function init($PDO) {
+            self::$PDO = $PDO;
         }
 
-        private function execute($fetchAll) {
-            $this -> stmt -> execute();
+        private static function execute($stmt, $fetchAll) {
+            $stmt -> execute();
 
-            return $fetchAll ? $this -> stmt -> fetchAll(PDO::FETCH_ASSOC) : $this -> stmt -> fetch(PDO::FETCH_ASSOC);
+            return $fetchAll ? $stmt -> fetchAll(PDO::FETCH_ASSOC) : $stmt -> fetch(PDO::FETCH_ASSOC);
         }
 
-        public function header() {
-            $this -> stmt = $this -> PDO -> prepare("SELECT title FROM stories ORDER BY id DESC LIMIT 1");
+        public static function header() {
+            $stmt = self::$PDO -> prepare("SELECT title FROM stories ORDER BY id DESC LIMIT 1");
 
-            return $this -> execute(false);
+            $stmt -> execute();
+
+            return $stmt -> fetchColumn();
         }
 
-        public function circle() {
-            $this -> stmt = $this -> PDO -> prepare("SELECT stories.title, stories.text, images.image_src, images.alt_text 
+        public static function circle() {
+            $stmt = self::$PDO -> prepare("SELECT stories.title, stories.text, images.image_src, images.alt_text 
             FROM stories 
             LEFT JOIN images ON stories.title = images.title
             ORDER BY stories.id DESC LIMIT 3");
 
-            return $this -> execute(true);
+            return self::execute($stmt, true);
         }
 
-        public function story($URL) {
-            $this -> stmt = $this -> PDO -> prepare("SELECT stories.title, stories.text, stories.audio_bool, audio.audio_src, audio.audio_duration
+        public static function story($URL) {
+            $stmt = self::$PDO -> prepare("SELECT stories.title, stories.text, stories.audio_bool, audio.audio_src, audio.audio_duration
             FROM stories
             LEFT JOIN audio ON stories.title = audio.title
             WHERE stories.title LIKE ?");
 
-            $this -> stmt -> bindParam(1, $URL, PDO::PARAM_STR);
+            $stmt -> bindValue(1, $URL, PDO::PARAM_STR);
 
-            return $this -> execute(false);
+            return self::execute($stmt, false);
         }
 
-        public function storyCount($URL) {
-            $this -> stmt = $this -> PDO -> prepare("UPDATE stories SET watch_count = watch_count + 1 WHERE title LIKE ?");
+        public static function storyCount($URL) {
+            $stmt = self::$PDO -> prepare("UPDATE stories SET watch_count = watch_count + 1 WHERE title LIKE ?");
 
-            $this -> stmt -> bindParam(1, $URL, PDO::PARAM_STR);
-            $this -> stmt -> execute();
+            $stmt -> bindValue(1, $URL, PDO::PARAM_STR);
+            $stmt -> execute();
         }
 
-        public function audioCount($title) {
-            $this -> stmt = $this -> PDO -> prepare("UPDATE audio SET listen_count = listen_count + 1 WHERE title LIKE ?");
+        public static function audioCount($title) {
+            $stmt = self::$PDO -> prepare("UPDATE audio SET listen_count = listen_count + 1 WHERE title LIKE ?");
 
-            $this -> stmt -> bindParam(1, $title, PDO::PARAM_STR);
-            $this -> stmt -> execute();
+            $stmt -> bindValue(1, $title, PDO::PARAM_STR);
+            $stmt -> execute();
         }
 
-        public function initAnchor() {
-            $this -> stmt = $this -> PDO -> prepare("SELECT stories.title, stories.text, images.image_src, images.alt_text 
+        public static function initAnchor() {
+            $stmt = self::$PDO -> prepare("SELECT stories.title, stories.text, images.image_src, images.alt_text 
             FROM stories 
             LEFT JOIN images ON stories.title = images.title
             ORDER BY stories.id DESC");
 
-            return $this -> execute(true);
+            return self::execute($stmt, true);
         }
 
-        public function search($search) {
-            $this -> stmt = $this -> PDO -> prepare("SELECT stories.title, stories.text, images.image_src, images.alt_text 
+        public static function search($search) {
+            $stmt = self::$PDO -> prepare("SELECT stories.title, stories.text, images.image_src, images.alt_text 
             FROM stories 
             LEFT JOIN images ON stories.title = images.title 
             WHERE stories.title LIKE ? ORDER BY stories.id DESC");
 
-            $this -> stmt -> bindParam(1, $search, PDO::PARAM_STR);
+            $stmt -> bindValue(1, $search, PDO::PARAM_STR);
 
-            return $this -> execute(true);
+            return self::execute($stmt, true);
         }
 
-        public function translate($keys, $language) {
-            $this -> stmt = $this -> PDO -> prepare("SELECT translation FROM translations WHERE `key` = ? AND `language` = ?");
+        public static function translate($keys, $language) {
+            $stmt = self::$PDO -> prepare("SELECT translation FROM translations WHERE `key` = ? AND `language` = ?");
 
-            $this -> stmt -> bindParam(1, $keys, PDO::PARAM_STR);
-            $this -> stmt -> bindParam(2, $language, PDO::PARAM_STR);
+            $stmt -> bindValue(1, $keys, PDO::PARAM_STR);
+            $stmt -> bindValue(2, $language, PDO::PARAM_STR);
 
-            return $this -> execute(false);
+            return self::execute($stmt, false);
         }
 
-        public function sitemap($write) {
-            $this -> stmt = $this -> PDO -> prepare("SELECT title FROM stories WHERE title LIKE ?");
+        public static function sitemap($write) {
+            $stmt = self::$PDO -> prepare("SELECT title FROM stories WHERE title LIKE ?");
 
-            $this -> stmt -> bindParam(1, $write, PDO::PARAM_STR);
+            $stmt -> bindValue(1, $write, PDO::PARAM_STR);
 
-            return $this -> execute(false);
+            return self::execute($stmt, false);
         }
 
-        public function titleCheck() {
-            $this -> stmt = $this -> PDO -> prepare("SELECT title FROM stories ORDER BY id DESC LIMIT 3");
+        public static function titleCheck() {
+            $stmt = self::$PDO -> prepare("SELECT title FROM stories ORDER BY id DESC LIMIT 3");
 
-            return $this -> execute(true);
+            return self::execute($stmt, true);
         }
     }
 
-    $queries = new Queries($PDO);
+    Queries::init($PDO);

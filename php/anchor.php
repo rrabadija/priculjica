@@ -8,7 +8,7 @@
         private $anchor = '';
 
         public function __construct() {
-            $this -> rows = $GLOBALS['queries'] -> initAnchor();
+            $this -> rows = Queries::initAnchor();
         }
 
         public function generateAnchor() {
@@ -39,13 +39,13 @@
             return $this -> anchor;
         }
 
-        public function anchor($title, $text, $link, $imageSrc, $altText) {
+        public function anchor($title, $text, $anchor, $imageSrc, $altText) {
             $title = sanitize($title ?? '');
 			$text = sanitize($text ?? '');
 			$imageSrc = sanitize($imageSrc ?? '');
 			$altText = sanitize($altText ?? '');
 
-            $this -> anchor = $link . '>
+            $this -> anchor = $anchor . '>
 
                             <div class="section_content_text_wrapper">
 

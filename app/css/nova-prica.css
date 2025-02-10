@@ -99,15 +99,19 @@ main img {
 
 section {
 	width: 65%;
+	min-height: 0;
 	max-width: 120ch;
+	padding-top: 0;
+	margin-top: 50px;
+	left: 50%;
 	flex-direction: column;
 	justify-content: flex-start;
 	gap: 50px;
+	transform: translateX(-50%);
 }
 
 .section_header {
 	width: 100%;
-	margin-top: 5%;
 	text-align: center;
 }
 
